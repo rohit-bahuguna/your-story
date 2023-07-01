@@ -13,7 +13,7 @@ function useMedia() {
             const data = new FormData();
             data.append("file", media);
             console.log(process.env.REACT_APP_CLOUDINARY_API_KEY)
-            data.append("upload_preset", "rohitbahuguna5126");
+            data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_API_KEY);
             const requestOptions = {
                 method: "POST",
                 body: data,
@@ -41,7 +41,7 @@ function useMedia() {
             const formData = new FormData();
             formData.append(
                 "upload_preset",
-                "rohitbahuguna5126"
+                process.env.REACT_APP_CLOUDINARY_API_KEY
             );
             formData.append("token", deleteToken);
             await fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/delete_by_token`, {
