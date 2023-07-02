@@ -15,7 +15,7 @@ const CreatePost = ({ postId }) => {
 	const navigate = useNavigate()
 	const {
 		post: {
-			postDetails
+			postDetails, isLoading
 		},
 		auth: { user: { token, fullName, email, username, profileAvatar } }
 	} = useSelector(state => state);
@@ -37,7 +37,7 @@ const CreatePost = ({ postId }) => {
 		},
 		postVideos: [],
 	});
-
+	console.log(postData)
 	const [newPostImage, setNewPostImage] = useState()
 	const [deleteToken, setDeleteToken] = useState()
 	const getPostData = e => {
@@ -82,6 +82,7 @@ const CreatePost = ({ postId }) => {
 
 	const updateUsersPost = () => {
 		dispatch(editPost({ token, postImage: postData?.postImage, postId, content: postData?.content }))
+		navigate('/posts')
 	}
 
 	return (

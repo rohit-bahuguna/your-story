@@ -42,9 +42,9 @@ export const getPostHandler = function (schema, request) {
  * */
 
 export const getAllUserPostsHandler = function (schema, request) {
-  const { username } = request.params;
+  const { email } = request.params;
   try {
-    const posts = schema.posts.where({ username })?.models;
+    const posts = schema.posts.where({ email })?.models;
     return new Response(200, {}, { posts });
   } catch (error) {
     return new Response(
@@ -167,10 +167,9 @@ export const likePostHandler = function (schema, request) {
         }
       );
     }
-
+    const { _id, fullName, email, createdAt, updatedAt, followers, following } = user;
     const postId = request.params.postId;
     const post = schema.posts.findBy({ _id: postId }).attrs;
-
     if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
       return new Response(
         400,
@@ -182,10 +181,11 @@ export const likePostHandler = function (schema, request) {
       (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push(user);
 
+    post.likes.likedBy.push({ _id, fullName, email, createdAt, updatedAt });
 
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(

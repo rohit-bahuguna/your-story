@@ -42,7 +42,7 @@ const Sidebar = ({ direction }) => {
 					</div>
 				</NavLink>
 				<div className="navlink-1"
-					onClick={() => dispatch(toggleSearchModal(!searchModal))}
+					onClick={() => dispatch(toggleSearchModal(true))}
 				>
 					<span>
 						<FaSearch className="icon " />

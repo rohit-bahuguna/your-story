@@ -94,7 +94,7 @@ export const userSlice = createSlice({
 		) => {
 			toast.success(message, { autoClose: 1000 })
 			state.isLoading = false;
-			state.user = { token: encodedToken, ...createdUser };
+			state.user = { token: encodedToken, ...createdUser, profileAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" };
 			state.status = true;
 		},
 		[signUpHandler.rejected]: (state, { payload }) => {

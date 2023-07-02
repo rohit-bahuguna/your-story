@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLogoutModal } from '../../redux/features/globalSlice';
 import { userLogout } from '../../redux/features/authSlice';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const Modal = () => {
 	const dispatch = useDispatch();
 	const { logoutModal } = useSelector(state => state.globalReducer);
+	const logoutRef = useRef(null);
+
+	useOutsideClick(logoutRef, () => dispatch(toggleLogoutModal(false)));
 	return (
 		<div
 			className={` absolute b h-screen w-screen ${logoutModal
 				? ''
-				: 'hidden'}`}>
+				: 'hidden'}`} ref={logoutRef}>
 			<div
 				className={`sticky  inset-1/3 border rounded-xl bg-white z-50  p-4 h-[30vh] md:w-[30vw]`}>
 				<button

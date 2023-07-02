@@ -49,13 +49,26 @@ export const editUserHandler = function (schema, request) {
         404,
         {},
         {
-          error:
+          errors: [
             "The username you entered is not Registered. Not Found error",
-
+          ],
         }
       );
     }
     const { userData } = JSON.parse(request.requestBody);
+
+    if (userData && userData.email && userData.email !== user.email) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "Username cannot be changed",
+          ],
+        }
+      );
+    }
+
     user = { ...user, ...userData, updatedAt: formatDate() };
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { user });
@@ -83,9 +96,9 @@ export const getBookmarkPostsHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
+          error:
             "The username you entered is not Registered. Not Found error",
-          ],
+
         }
       );
     }
@@ -131,18 +144,22 @@ export const bookmarkPostHandler = function (schema, request) {
         { errors: ["This Post is already bookmarked"] }
       );
     }
-    user.bookmarks.push({ ...post });
+
+    const newUser = { ...user, bookmarks: [...user.bookmarks, { _id: post._id, postImage: post.postImage, comments: post.comments, likes: { likeCount: post.likes.likeCount } }] }
+
+    console.log(newUser)
+
     this.db.users.update(
-      { _id: user._id },
-      { ...user, updatedAt: formatDate() }
+      { _id: newUser._id },
+      { ...newUser, updatedAt: formatDate() }
     );
-    return new Response(200, {}, { bookmarks: user.bookmarks, message: "Post bookmarked" });
+    return new Response(200, {}, { bookmarks: newUser.bookmarks });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        error, code: 500
       }
     );
   }
@@ -182,7 +199,7 @@ export const removePostFromBookmarkHandler = function (schema, request) {
       { _id: user._id },
       { ...user, updatedAt: formatDate() }
     );
-    return new Response(200, {}, { bookmarks: user.bookmarks, message: "Post Removed from Bookmarks" });
+    return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
       500,
@@ -215,6 +232,19 @@ export const followUserHandler = function (schema, request) {
         }
       );
     }
+
+    if (user._id === followUser._id) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "You cannot follow yourself"
+          ],
+        }
+      );
+    }
+
     const isFollowing = user.following.some(
       (currUser) => currUser._id === followUser._id
     );

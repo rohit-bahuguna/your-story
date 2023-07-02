@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 	}, [status])
 	return (
 		<div
-			className={`  flex md:flex-row w-full h-{100%} m-0 mb-10 flex-col  `}
+			className={`  flex md:flex-row w-full h-{100%}  mb-10 flex-col  `}
 
 		>
 			<>

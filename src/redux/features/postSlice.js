@@ -180,11 +180,15 @@ const sortPostByTranding = (posts) => {
 }
 
 const sortPostByDate = (posts) => {
-  return posts.sort((a , b) => new Date(a.createdAt) - new Date(b.createdAt))
+  return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 }
 
 const findCurrentUsersPOsts = (posts, email) => {
   return posts.filter(post => post.postBy.email === email)
+}
+
+const updatePostDetails = (posts, postId) => {
+  return posts.filter(post => post.id === postId)[0]
 }
 
 const initialState = {
@@ -192,7 +196,7 @@ const initialState = {
   currentUsersPosts: [],
   totalPosts: 0,
   postDetails : {},
-  isLoading: true,
+  isLoading: false,
   message: "",
   error : ""
 };
@@ -218,7 +222,7 @@ extraReducers: {
     },
 	[getAllPosts.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-		state.posts = payload;
+    state.posts = sortPostByDate(payload);
 		state.totalPosts = payload.length
     },
     [getAllPosts.rejected]: (state, { payload }) => {
@@ -238,7 +242,7 @@ extraReducers: {
     },
 
     [createPost.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
       toast.success("Post created succesfully", { id: state.loadingId });
     },
     [createPost.rejected]: (state, { payload }) => {
@@ -246,17 +250,23 @@ extraReducers: {
     },
 
     [editPost.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
+      state.isLoading = false
       console.log(payload)
     //   toast.success("Post updated", { id: state.loadingId });
-    },
+  },
+  [editPost.pending]: (state) => {
+
+    state.isLoading = true
+
+  },
     [editPost.rejected]: (state, { payload }) => {
       state.error = payload;
       console.log(payload)
     },
 
     [deletePost.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
       toast.success("Post Deleted", { autoClose: 1000 })
     },
   [deletePost.rejected]: (state, { payload }) => {
@@ -265,27 +275,30 @@ extraReducers: {
     },
 
     [likePost.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
+      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
     },
     [likePost.rejected]: (state, { payload }) => {
       console.log(payload)
     },
 
     [dislikePost.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
+      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
     },
     [dislikePost.rejected]: (state, { payload }) => {
       state.error = payload;
     },
 
     [addComment.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
     },
     [editComment.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
     },
     [deleteComment.fulfilled]: (state, { payload }) => {
-      state.posts = payload;
+      state.posts = sortPostByDate(payload);
     },
   },});
 

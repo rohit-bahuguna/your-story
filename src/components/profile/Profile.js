@@ -16,14 +16,10 @@ const Profile = () => {
 	useEffect(() => {
 
 		dispatch(getCurrentUsersPosts(email))
-		// if (auth.user.email === currentUser.email) {
-		// 	dispatch(setCurrentProfilePic(auth.user.profileAvatar))
-		// } else {
-		// 	dispatch(setCurrentProfilePic())
-		// }
-
 
 	}, [email])
+
+	console.log(currentUser)
 	return <Layout>
 
 		<div className="flex   justify-center items-center md:w-[82.80vw]   mt-5  mb-20  ">

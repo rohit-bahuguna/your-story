@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BsGlobe } from "react-icons/bs"
 import { AiOutlineMail } from "react-icons/ai"
 import { Link } from 'react-router-dom';
@@ -6,15 +6,16 @@ import { BiCamera } from 'react-icons/bi';
 import ToolTip from '../comman/ToolTip';
 import Avatar from './Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentProfilePic, updateProfile } from '../../redux/features/userSlice';
+import { followUser, setCurrentProfilePic, unfollowUser, updateProfile } from '../../redux/features/userSlice';
 import { updateAuthProfile } from '../../redux/features/authSlice';
 import EditProfile from './EditProfile';
 import { isFollowed } from '../../utils';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const ProfileCard = ({ user }) => {
 	const dispatch = useDispatch()
 	const { auth, } = useSelector(state => state);
-	const { profileAvatar, fullName, username, followers, following, website, email, bio, id } = user
+	const { profileAvatar, fullName, username, followers, following, website, email, bio, _id } = user
 	const [display, setDisplay] = useState({
 		upload: false,
 		avatar: false,
@@ -39,12 +40,17 @@ const ProfileCard = ({ user }) => {
 		}
 	}
 
+	const followOrUnfollow = () => {
+		isUserFolowing ? dispatch(unfollowUser({ token: auth.user.token, followUserId: _id })) : dispatch(followUser({ token: auth.user.token, followUserId: _id }))
+	}
 
+	const profileRef = useRef(null)
+	useOutsideClick(profileRef, () => setDisplay({ ...display, edit: false }))
 
 	return <div className="flex justify-evenly items-center flex-col md:flex-row relative z-10 md:w-[50vw] w-screen " >
 
-		<div className=' relative' onMouseOver={() => setDisplay({ ...display, upload: true })}
-			onMouseLeave={() => setDisplay({ ...display, upload: false })}
+		<div className=' relative'
+
 		>
 			<img src={profileAvatar == "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" : profileAvatar} alt={fullName} className='md:w-56 rounded-full ' />
 
@@ -58,7 +64,7 @@ const ProfileCard = ({ user }) => {
 					onClick={() => setDisplay({ ...display, edit: true })}
 				> Edit Profile</button>}
 				{auth.user.email !== email && <button className="border rounded-full text-lg text-indigo-700 hover:bg-indigo-100 px-3 py-1"
-					onClick={() => setDisplay({ ...display, edit: true })}
+					onClick={followOrUnfollow}
 				>
 					{
 						isUserFolowing ? "Unfollow" : "Follow"
@@ -86,9 +92,9 @@ const ProfileCard = ({ user }) => {
 		</div>}
 
 		{
-			display.edit && <div className='absolute z-20 top-1/2 md:top-0 bg-white md:left-0  bottom-0 '>
+			display.edit && <div className='absolute z-20 top-1/2 md:top-0 bg-white md:left-0  bottom-0 ' >
 
-				<EditProfile data={{ currentProfilePic, setCurrentProfilePic, user, display, setDisplay, auth }} />
+				<EditProfile data={{ currentProfilePic, setCurrentProfilePic, user, display, setDisplay, auth, profileRef }} />
 			</div>
 		}
 

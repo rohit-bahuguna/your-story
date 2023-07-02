@@ -8,7 +8,7 @@ import { RiExpandUpDownFill } from 'react-icons/ri';
 import { ToastContainer, toast } from 'react-toastify';
 import { sortByDate, sortByTranding } from '../../redux/features/postSlice';
 const Posts = () => {
-	const [active, setActive] = useState();
+	const [active, setActive] = useState("latest");
 	const dispatch = useDispatch();
 	const {
 		post: { posts, totalPosts, isLoading, message, error }
@@ -32,22 +32,8 @@ const Posts = () => {
 		<div className="flex flex-col gap-10 md:gap-20   justify-center items-center px-5  md:pt-2">
 			<ToastContainer />
 			<div className="absolute top-0 flex  justify-center items-center gap-10  mt-16  py-3 w-1/4">
-				<p
-					className={
-						active === 'tranding'
-							? 'bg-gray-200 py-1 px-5 rounded-full text-indigo-500'
-							: ''
-					}
-					onClick={() => {
-						setActive('tranding');
-						dispatch(sortByTranding());
-					}}>
-					<div className='flex gap-2 items-center'>
-						<AiTwotoneFire className="inline text-2xl" />{' '}
-					<span className="text-lg">Tranding</span>
-					</div>
-				</p>
-				<p>|</p>
+
+
 				<p
 					className={
 						active === 'latest'
@@ -60,14 +46,30 @@ const Posts = () => {
 					}}>
 					<div className='flex gap-2 items-center'>
 						<RiExpandUpDownFill className="inline text-2xl" />{' '}
-					<span className="text-lg">Latest</span>
+						<span className="text-lg">Latest</span>
+					</div>
+				</p>
+				<p>|</p>
+				<p
+					className={
+						active === 'tranding'
+							? 'bg-gray-200 py-1 px-5 rounded-full text-indigo-500'
+							: ''
+					}
+					onClick={() => {
+						setActive('tranding');
+						dispatch(sortByTranding());
+					}}>
+					<div className='flex gap-2 items-center'>
+						<AiTwotoneFire className="inline text-2xl" />{' '}
+						<span className="text-lg">Tranding</span>
 					</div>
 				</p>
 			</div>
 			<div>
 				{isLoading
-				? 'Loading'
-				: <div className="flex flex-col gap-5">
+					? 'Loading'
+					: <div className="flex flex-col gap-5">
 						{posts &&
 							posts.map(post => <PostCard key={post._id} post={post} />)}
 					</div>}

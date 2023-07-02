@@ -1,6 +1,7 @@
 import React from 'react'
 import PostCard from '../comman/PostCard'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const PostGrid = () => {
     const { post: { currentUsersPosts }, user: { currentUser }, auth: { user } } = useSelector(state => state)
@@ -16,9 +17,9 @@ const PostGrid = () => {
                             You Do Not Have Any Post To Display
 
                         </h1>
-                        {user.email !== currentUser.email ? "" : <button className='mt-5 mb-10 text-lg rounded-full border shadow-lg px-3 py-1 hover:bg-indigo-100 text-indigo-700'>
+                        {user.email !== currentUser.email ? "" : <Link to="/post/create"><button className='mt-5 mb-10 text-lg rounded-full border shadow-lg px-3 py-1 hover:bg-indigo-100 text-indigo-700'>
                             Create Post
-                        </button>}
+                        </button></Link>}
                     </div>
             }
         </div>

@@ -54,7 +54,7 @@ export const addBookmark = createAsyncThunk(
                 return data;
             }
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response);
         }
     }
 );
@@ -162,12 +162,7 @@ export const userSlice = createSlice({
 
             state.currentUser = filterCurrentUser(state.users, payload)
         },
-        setCurrentProfilePic: (state, { payload }) => {
-            payload ?
-                state.currentProfilePic = payload
-                :
-                state.currentProfilePic = state.currentUser.profileAvatar
-        }
+
     },
     extraReducers: {
         [getAllUsers.fulfilled]: (state, { payload }) => {
@@ -175,7 +170,7 @@ export const userSlice = createSlice({
         },
 
         [updateProfile.fulfilled]: (state, { payload }) => {
-            console.log("updated", payload)
+
             state.users = state.users.map((user) =>
                 user.email === payload.email ? payload : user
             );
@@ -190,6 +185,7 @@ export const userSlice = createSlice({
         },
 
         [getBookmarks.fulfilled]: (state, { payload: { bookmarks, message } }) => {
+            console.log("bookmarks", bookmarks)
             state.bookmarks = bookmarks;
             toast.success(message, { autoClose: 1000 })
         },
@@ -211,17 +207,20 @@ export const userSlice = createSlice({
         [followUser.fulfilled]: (state, { payload: { user, followUser, message } }) => {
             state.users = updateFollowingUser(state.users, user);
             state.users = updateFollowedUser(state.users, followUser);
+            state.currentUser = filterCurrentUser(state.users, state.currentUser.email)
             toast.success(message, { autoClose: 1000 })
+
         },
 
         [unfollowUser.fulfilled]: (state, { payload: { user, followUser, message } }) => {
             state.users = updateFollowingUser(state.users, user);
             state.users = updateFollowedUser(state.users, followUser);
+            state.currentUser = filterCurrentUser(state.users, state.currentUser.email)
             toast.success(message, { autoClose: 1000 })
         },
     },
 });
 
-export const { getCurrentUser, setCurrentProfilePic } = userSlice.actions;
+export const { getCurrentUser } = userSlice.actions;
 
 export default userSlice.reducer;

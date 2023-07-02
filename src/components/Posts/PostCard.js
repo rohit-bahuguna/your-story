@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { BiComment, BiBookmark } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md';
@@ -10,7 +10,7 @@ import { addBookmark, removeBookmark } from '../../redux/features/userSlice';
 import { isInBookmarks } from '../../utils/postInBookmarks';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
-
+import { useOutsideClick } from "../../hooks/useOutsideClick"
 
 import { isLiked } from '../../utils';
 const PostCard = ({ post }) => {
@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
 	} = post;
 	const { auth: { user }, user: { bookmarks } } = useSelector(state => state)
 	const dispatch = useDispatch()
-	const postIsInBookmark = isInBookmarks(bookmarks, post.id)
+	const postIsInBookmark = isInBookmarks(bookmarks, post._id)
 	const postLikedByUser = isLiked(likedBy, user.email)
 	const [doubleLike, setDoubleLike] = useState(false)
 	const [showMore, setShowMore] = useState(false)
@@ -49,6 +49,9 @@ const PostCard = ({ post }) => {
 			setDoubleLike(false)
 		}, 1000)
 	}
+	const postRef = useRef(null)
+
+	useOutsideClick(postRef, () => setShowMore(false))
 
 	return (
 		<div className="flex md:w-[30vw] flex-col gap-5 border rounded-md px-2 py-3 ">
@@ -64,7 +67,7 @@ const PostCard = ({ post }) => {
 				</div>
 				<FiMoreHorizontal className=" self-center text-2xl hover:cursor-pointer hover:text-indigo-700" onClick={() => setShowMore(!showMore)} />
 				{
-					showMore && <div className=' flex flex-col gap-3  border absolute top-10  right-0 bg-white z-10 py-3  rounded-xl shadow-lg min-w-[12vw]'>
+					showMore && <div className=' flex flex-col gap-3  border absolute top-10  right-0 bg-white z-10 py-3  rounded-xl shadow-lg min-w-[12vw]' ref={postRef}>
 						{email === user.email && <>
 							<p className='more text-red-500' onClick={(() => dispatch(deletePost({ _id, token: user.token })))}>Delete</p>
 
@@ -77,7 +80,9 @@ const PostCard = ({ post }) => {
 						{email !== user.email && <>
 							<p className='more '>Add To Bookmark</p>
 						</>}
-						<p className='more '>Go To Post</p>
+						<Link to={`/post/${_id}`}>
+							<p className='more'>Go To Post</p>
+						</Link>
 						<p className='more ' onClick={() => setShowMore(false)}>Cancel</p>
 					</div>
 				}

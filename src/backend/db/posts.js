@@ -19,7 +19,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-05-01',
+		createdAt: "2023-06-25T09:32:39+05:30",
 		updatedAt: formatDate(),
 		comments: [
 			{
@@ -57,7 +57,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-05-02',
+		createdAt: '2023-06-26T09:32:39+05:30',
 		updatedAt: formatDate(),
 		comments: [
 			{
@@ -95,7 +95,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-04-05',
+		createdAt: '2023-06-27T09:32:39+05:30',
 		updatedAt: formatDate(),
 		comments: [
 			{
@@ -133,7 +133,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-05-01',
+		createdAt: '2023-06-28T09:32:39+05:30',
 		updatedAt: formatDate(),
 		comments: [
 			{
@@ -171,7 +171,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-05-02',
+		createdAt: '2023-06-29T09:32:39+05:30',
 		updatedAt: formatDate(),
 		comments: [
 			{
@@ -199,7 +199,7 @@ export const posts = [
 	{
 		_id: uuid(),
 		content:
-			'2022-05-02 Must try of this week: Vada Pao from SK Vadewale in Pune. The taste is absolutely mind-boggling and fresh.',
+			'2023-07-02T09:32:39+05:30 Must try of this week: Vada Pao from SK Vadewale in Pune. The taste is absolutely mind-boggling and fresh.',
 		likes: { likeCount: 0, likedBy: [], dislikedBy: [], },
 		postBy: {
 			fullName: 'Prashant Singh Chauhan',
@@ -209,7 +209,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		postVideos: [],
-		createdAt: '2022-04-05',
+		createdAt: '2023-07-02T09:32:39+05:30',
 		updatedAt: formatDate(),
 		comments: [
 			{

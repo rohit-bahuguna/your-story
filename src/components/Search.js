@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SearchBar from './comman/SearchBar';
 import { BsArrowLeft } from 'react-icons/bs';
 import { toggleSearchModal } from '../redux/features/globalSlice';
@@ -6,12 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSearchedUser } from '../utils';
 import { Link } from 'react-router-dom';
 import { getCurrentUser } from '../redux/features/userSlice';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 
 const Search = () => {
 	const [search, setSearch] = useState("")
 	const [searchResult, setSearchResult] = useState([])
 	const dispatch = useDispatch()
+	const searchRef = useRef(null);
 
+	useOutsideClick(searchRef, () => dispatch(toggleSearchModal(false)));
 	const {
 		user: { users }
 	} = useSelector(state => state);
@@ -20,7 +23,7 @@ const Search = () => {
 		setSearchResult(getSearchedUser(users, search))
 	}, [search])
 
-	return <div className=' fixed  bg-white z-10 top-1/3 md:top-0 bottom-14  md:bottom-0 w-screen md:w-[26vw] py-2 px-2 border-t md:border-r shadow-lg rounded-xl flex flex-col gap-3'>
+	return <div className=' fixed  bg-white z-10 top-1/3 md:top-0 bottom-14  md:bottom-0 w-screen md:w-[26vw] py-2 px-2 border-t md:border-r shadow-lg rounded-xl flex flex-col gap-3' ref={searchRef}>
 		<BsArrowLeft className='text-3xl ml-2 hover:text-indigo-700 hover:cursor-pointer' onClick={() => dispatch(toggleSearchModal(false))} />
 		<SearchBar search={search} setSearch={setSearch} style={`w-[95vw] md:w-[25vw]`} focus={true} />
 		<div className='mt-3 overflow-y-auto'>
