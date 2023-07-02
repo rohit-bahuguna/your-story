@@ -52,7 +52,6 @@ export const addPostCommentHandler = function (schema, request) {
         const comment = {
             _id: uuid(),
             ...commentData,
-            user: user,
             replies: [],
             votes: { upvotedBy: [], downvotedBy: [] },
             createdAt: formatDate(),

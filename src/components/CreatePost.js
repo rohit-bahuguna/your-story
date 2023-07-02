@@ -87,25 +87,28 @@ const CreatePost = ({ postId }) => {
 
 	return (
 		<Layout>
-			<div className='flex  justify-center md:w-[83vw] max-h-[90vh]  z-20  items-center '>
-				<div className="flex flex-col gap-5    ">
-					<div className="flex flex-col  ">
-						{!postId && <div className="flex justify-between items-center px-5 py-1">
+			<div className='flex w-screen justify-center md:w-[83vw] max-h-[90vh]   z-20  items-center '>
+				<div className="flex flex-col  md:mt-0 mt-5  ">
+					<div className="flex flex-col   ">
+						{!postId && <div className="flex  w-screen md:w-full justify-between items-center px-5 py-1">
 
 							<span className="text-xl font-semibold">Create new post</span>
-							<button className="text-sky-600 hover:bg-gray-200 px-5 py-1  text-xl border rounded-full"
-								onClick={() => {
-									dispatch(createPost({ postData, token }))
-									navigate(-1)
+							<button className="text-sky-600 hover:bg-gray-200 px-5 py-1  text-xl  rounded-full"
+								onClick={(e) => {
+									e.preventDefault()
+									if (postData.postImage !== "/placeholder.png") {
+										dispatch(createPost({ postData, token }))
+										navigate(-1)
+									}
 								}}
 							>
 								Share
 							</button>
 						</div>}
-						<div className="flex   justify-around w-[60vw]  py-10 px-5">
-							<div className="flex flex-col items-center w-full gap-14 ">
+						<div className="flex flex-col  md:flex-row  h-screen md:h-full justify-around w-screen md:w-[60vw]  py-10 px-5">
+							<div className="flex flex-col  items-center w-full gap-14 ">
 
-								{isUploadingMedia ? <Loader message={"Uploading Media"} /> : <img src={postData.postImage} alt="upload media  " className="max-w-[20vw] m-2" />}
+								{isUploadingMedia ? <Loader message={"Uploading Media"} /> : <img src={postData.postImage} alt="upload media  " className="md:max-w-[20vw] w-[30vw]    " />}
 
 
 								<div >
@@ -128,7 +131,7 @@ const CreatePost = ({ postId }) => {
 								</div>
 							</div>
 
-							<div className="mt-3 flex flex-col gap-2  ">
+							<div className="mt-3  flex flex-col gap-2  ">
 								<div className="flex gap-2">
 									<img src="/profile.png" alt="" className="w-8 rounded-full" />
 									<span className="font-semibold">the rohit bahuguna</span>
@@ -147,7 +150,7 @@ const CreatePost = ({ postId }) => {
 									className=" resize-none focus:outline-none"
 								/>
 
-								<div className="flex justify-between px-3">
+								<div className="flex justify-between px-3 ">
 									<HiOutlineEmojiHappy
 										className="text-2xl"
 										onClick={() => setToggleEmoji(!toggleEmaoji)}
@@ -158,7 +161,7 @@ const CreatePost = ({ postId }) => {
 											: 0}
 									</span>
 								</div>
-								<EmojiPicker onEmojiClick={getPostData} toggle={toggleEmaoji} />
+								<EmojiPicker onEmojiClick={getPostData} toggle={toggleEmaoji} setToggleEmoji={setToggleEmoji} />
 							</div>
 
 						</div>

@@ -139,7 +139,8 @@ export const addComment = createAsyncThunk(
       if (status === 201) {
         return data.posts;
       }
-    } catch {
+    } catch (error) {
+      console.log(error)
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -293,12 +294,16 @@ extraReducers: {
 
     [addComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
+      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
     },
     [editComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
+      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
     },
     [deleteComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
+      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
     },
   },});
 

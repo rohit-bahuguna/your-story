@@ -92,7 +92,7 @@ const ProfileCard = ({ user }) => {
 		</div>}
 
 		{
-			display.edit && <div className='absolute z-20 top-1/2 md:top-0 bg-white md:left-0  bottom-0 ' >
+			display.edit && <div className='absolute z-20 top-0   bg-white md:left-0 bottom-0 ' >
 
 				<EditProfile data={{ currentProfilePic, setCurrentProfilePic, user, display, setDisplay, auth, profileRef }} />
 			</div>

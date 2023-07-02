@@ -36,11 +36,6 @@ const Layout = ({ children }) => {
 					
 					{children}
 
-					{/* {openModal
-						? <div className="border bg-[#0000007b]	z-10 fixed top-0 left-0 right-0 bottom-0  flex justify-center items-center">
-							<CreatePost />
-						</div>
-						: ''} */}
 					{
 						searchModal && <Search />
 					}

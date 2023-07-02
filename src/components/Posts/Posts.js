@@ -13,7 +13,7 @@ const Posts = () => {
 	const {
 		post: { posts, totalPosts, isLoading, message, error }
 	} = useSelector(state => state);
-	console.log("ppppppppppppppppppppppp", posts)
+
 	useEffect(() => {
 		dispatch(getAllPosts());
 		dispatch(getAllUsers());

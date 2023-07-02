@@ -26,7 +26,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -36,7 +36,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -64,7 +64,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -74,7 +74,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -102,7 +102,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -112,7 +112,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -140,7 +140,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -150,7 +150,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -178,7 +178,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -188,7 +188,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -216,7 +216,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Nice!',
 				name: 'Mohit',
-				username: '@mohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),
@@ -226,7 +226,7 @@ export const posts = [
 				_id: uuid(),
 				message: 'Very Nice!',
 				name: 'Rohit',
-				username: '@rohit',
+				email: 'pareshaaaaan@gmail.com',
 				profilePicture:
 					'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 				createdAt: formatDate(),

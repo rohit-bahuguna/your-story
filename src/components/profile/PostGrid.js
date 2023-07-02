@@ -12,7 +12,7 @@ const PostGrid = () => {
             {
                 currentUsersPosts.length > 0 ? currentUsersPosts.map(post => <PostCard post={post} />)
 
-                    : <div className=' w-screen md:w-[80vw] flex flex-col items-center'>
+                    : <div className=' w-screen md:w-[80vw] flex flex-col  items-center'>
                         <h1 className='text-lg md:text-2xl '>
                             You Do Not Have Any Post To Display
 
