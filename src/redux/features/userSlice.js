@@ -162,6 +162,14 @@ export const userSlice = createSlice({
 
             state.currentUser = filterCurrentUser(state.users, payload)
         },
+        userReset: (state) => {
+            state.users = [];
+            state.currentUser = {};
+            state.currentProfilePic = "";
+            state.message = '';
+            state.error = '';
+            state.bookmarks = [];
+        }
 
     },
     extraReducers: {
@@ -221,6 +229,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { getCurrentUser } = userSlice.actions;
+export const { getCurrentUser, userReset } = userSlice.actions;
 
 export default userSlice.reducer;

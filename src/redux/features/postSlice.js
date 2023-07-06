@@ -214,7 +214,16 @@ export const postSlice = createSlice({
     },
     getCurrentUsersPosts: (state, { payload }) => {
       state.currentUsersPosts = findCurrentUsersPOsts(state.posts, payload)
-    }
+    },
+    postReset: (state) => {
+      state.posts = [];
+      state.currentUsersPosts = [];
+      state.totalPosts = 0;
+      state.postDetails = {};
+      state.isLoading = false;
+      state.message = "";
+      state.error = "";
+    },
 
   },
 extraReducers: {
@@ -307,5 +316,5 @@ extraReducers: {
     },
   },});
 
-export const { sortByDate, sortByTranding, getCurrentUsersPosts } = postSlice.actions;
+export const { sortByDate, sortByTranding, getCurrentUsersPosts, postReset } = postSlice.actions;
 export default postSlice.reducer;

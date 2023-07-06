@@ -8,161 +8,114 @@ import { formatDate } from '../utils/authUtils';
 export const users = [
 	{
 		_id: uuid(),
-		fullName: 'Prashant Singh Chauhan',
-		email: 'pareshaaaaan@gmail.com',
-		username: 'pareshaaaaan',
-		profileAvatar: 'https://picsum.photos/id/1012/150',
-		password: '123456',
-		bio: 'Hey there, Prashant here',
-		website: 'https://github.com/percius47',
-
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		fullName: 'Rohit Bahuguna',
+		email: 'rohitbahuguna.work@gmail.com',
+		username: 'rohitbahuguna',
+		profileAvatar: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
+		password: 'Rohit123',
+		bio: "life_is_like_#photograph Learning new lesson everyday from life Doing everything that makes me happy ♥️#himalayan🏍 and coding 👨‍💻is love",
+		website: 'https://rohit-bahuguna.netlify.app/',
+		createdAt: "2023-06-25T09:32:39+05:30",
+		updatedAt: "2023-06-25T09:32:39+05:30",
 		following: [
-			{
-				_id: uuid(),
-				fullName: 'John Doe',
-				username: 'johndoe',
-				profileAvatar: 'https://picsum.photos/id/1009/150'
-			}
 		],
 		followers: [
-			{
-				_id: uuid(),
-				fullName: 'John Doe',
-				username: 'johndoe',
-				profileAvatar: 'https://picsum.photos/id/1009/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Aditya Jadhav',
-				username: 'aditya_jadhav',
-				profileAvatar: 'https://picsum.photos/id/100/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Anshaal Khanna',
-				username: 'anshaal10',
-				profileAvatar: 'https://picsum.photos/id/1005/150'
-			}
 		],
 		bookmarks: []
 	},
 	{
 		_id: uuid(),
-		fullName: 'John Doe',
-		username: 'johndoe',
-		email: 'johndoe@gmail.com',
-		password: '123john',
-		bio: 'Hey there, John here',
-		website: 'https://www.johndoe.com',
-		profileAvatar: 'https://picsum.photos/id/1009/150',
-		createdAt: '2022-05-05',
-		updatedAt: formatDate(),
+		fullName: 'Kailash Rawat',
+		username: 'kaili',
+		email: 'kaili@gmail.com',
+		password: 'kaili123',
+		bio: 'Hey there, i am kailash i love animine',
+		website: '',
+		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688569153/your_story/profile/uii3uuhqvonb7fz1pbtv.jpg',
+		createdAt: "2023-06-26T09:32:39+05:30",
+		updatedAt: "2023-06-26T09:32:39+05:30",
 		following: [
-			{
-				_id: uuid(),
-				fullName: 'Prashant Singh Chauhan',
-				username: 'pareshaaaaan',
-				profileAvatar: 'https://picsum.photos/id/1012/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Aditya Jadhav',
-				username: 'aditya_jadhav',
-				profileAvatar: 'https://picsum.photos/id/100/150'
-			}
+
 		],
 		followers: [
-			{
-				_id: uuid(),
-				fullName: 'Anshaal Khanna',
-				username: 'anshaal10',
-				profileAvatar: 'https://picsum.photos/id/1005/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Prashant Singh Chauhan',
-				username: 'pareshaaaaan',
-				profileAvatar: 'https://picsum.photos/id/1012/150'
-			}
+
 		]
 		,
 		bookmarks: []
 	},
 	{
 		_id: uuid(),
-		fullName: 'Anshaal Khanna',
-		username: 'anshaal10',
-		email: "anshaal10@gmail.com",
-		password: 'anshaal123',
-		bio: 'Hey there, Anshaal here',
-		website: 'https://www.nike.com',
-		profileAvatar: 'https://picsum.photos/id/1005/150',
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		fullName: 'kavita nayal',
+		username: 'kabbu',
+		email: "kabbu@gmail.com",
+		password: 'kabbu@123',
+		bio: 'Hey there, i am kabbu i look dumb , but i am smart ',
+		website: '',
+		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688569144/your_story/profile/dkhdjb9zm9qhgzohyiqk.jpg',
+		createdAt: "2023-06-27T09:32:39+05:30",
+		updatedAt: "2023-06-27T09:32:39+05:30",
 		following: [
-			{
-				_id: uuid(),
-				fullName: 'Prashant Singh Chauhan',
-				username: 'pareshaaaaan',
-				profileAvatar: 'https://picsum.photos/id/1012/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'John Doe',
-				username: 'johndoe',
-				profileAvatar: 'https://picsum.photos/id/1009/150'
-			}
+
 		],
 		followers: [
-			{
-				_id: uuid(),
-				fullName: 'Aditya Jadhav',
-				username: 'aditya_jadhav',
-				profileAvatar: 'https://picsum.photos/id/100/150'
-			}
+
 		],
 		bookmarks: []
 	},
 	{
 		_id: uuid(),
-		fullName: 'Aditya Jadhav',
-		username: 'aditya_jadhav',
-		password: 'jadhav123',
-		email: "aditya_jadhav@gmail.com",
-		bio: 'Hello Fritter, Jadhav here!',
-		website: 'https://www.wikipedia.com',
-		profileAvatar: 'https://picsum.photos/id/100/150',
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		fullName: 'Bharat Goyal',
+		username: 'bharatgoyal',
+		password: 'bharat@#123',
+		email: "bharatgoyal@gmail.com",
+		bio: 'Hello there i am , bharat goyal!',
+		website: '',
+		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688569126/your_story/profile/bzj5aetc2pamoophpcd2.jpg',
+		createdAt: "2023-06-30T09:32:39+05:30",
+		updatedAt: "2023-06-30T09:32:39+05:30",
 		following: [
-			{
-				_id: uuid(),
-				fullName: 'Prashant Singh Chauhan',
-				username: 'pareshaaaaan',
-				profileAvatar: 'https://picsum.photos/id/1012/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Anshaal Khanna',
-				username: 'anshaal10',
-				profileAvatar: 'https://picsum.photos/id/1005/150'
-			}
+
 		],
 		followers: [
-			{
-				_id: uuid(),
-				fullName: 'John Doe',
-				username: 'johndoe',
-				profileAvatar: 'https://picsum.photos/id/1009/150'
-			},
-			{
-				_id: uuid(),
-				fullName: 'Anshaal Khanna',
-				username: 'anshaal10',
-				profileAvatar: 'https://picsum.photos/id/1005/150'
-			}
+
+		],
+		bookmarks: []
+	},
+	{
+		_id: uuid(),
+		fullName: 'Anurag Jha',
+		username: 'annu',
+		password: 'anurag@#123',
+		email: "anuragjha@gmail.com",
+		bio: 'Hello there i am , anurag jha!',
+		website: '',
+		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688569137/your_story/profile/k8mbyzh56rfhfcmd1qz2.jpg',
+		createdAt: "2023-07-02T09:32:39+05:30",
+		updatedAt: "2023-07-02T09:32:39+05:30",
+		following: [
+
+		],
+		followers: [
+
+		],
+		bookmarks: []
+	},
+	{
+		_id: uuid(),
+		fullName: 'Guest Name',
+		username: 'guest',
+		password: 'guestuser',
+		email: "guestuser@gmail.com",
+		bio: 'Hello there i am , guest user',
+		website: '',
+		profileAvatar: '',
+		createdAt: "2023-07-02T09:32:39+05:30",
+		updatedAt: "2023-07-02T09:32:39+05:30",
+		following: [
+
+		],
+		followers: [
+
 		],
 		bookmarks: []
 	},

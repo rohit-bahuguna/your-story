@@ -31,7 +31,7 @@ const Posts = () => {
 	return (
 		<div className="flex flex-col gap-10 md:gap-20   justify-center items-center px-5  md:pt-2">
 			<ToastContainer />
-			<div className="absolute top-0 flex  justify-center items-center gap-10  mt-16  py-3 w-1/4">
+			<div className="absolute top-0 flex  justify-center items-center gap-10  mt-16  py-5 w-1/4">
 
 
 				<p

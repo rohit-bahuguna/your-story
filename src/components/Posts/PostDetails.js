@@ -121,11 +121,11 @@ const PostDetails = () => {
 												</div>
 											</div>
 
-											<div className='absolute border bg-white text-lg  px-5 py-2 '>
+											{/* <div className='absolute border bg-white text-lg  px-5 py-2 '>
 												<p>Edit</p>
 												<p>Delete</p>
 												<p>Cancel</p>
-											</div>
+											</div> */}
 										</div>
 										<MdFavorite className='text-xl' />
 									</div>
