@@ -7,6 +7,7 @@ import { AiTwotoneFire } from 'react-icons/ai';
 import { RiExpandUpDownFill } from 'react-icons/ri';
 import { ToastContainer, toast } from 'react-toastify';
 import { sortByDate, sortByTranding } from '../../redux/features/postSlice';
+import Loader from '../comman/Loader';
 const Posts = () => {
 	const [active, setActive] = useState("latest");
 	const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const Posts = () => {
 			</div>
 			<div>
 				{isLoading
-					? 'Loading'
+					? <Loader/>
 					: <div className="flex flex-col gap-5">
 						{posts &&
 							posts.map(post => <PostCard key={post._id} post={post} />)}

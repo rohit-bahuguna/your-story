@@ -11,7 +11,7 @@ import PostGrid from './PostGrid';
 const Profile = () => {
 	const { email } = useParams()
 	const dispatch = useDispatch()
-	const { auth, user: { currentUser } } = useSelector(state => state);
+	const { auth, user: { currentUser }  } = useSelector(state => state);
 
 	useEffect(() => {
 

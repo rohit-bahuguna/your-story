@@ -1,20 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {  useRef, useState } from 'react';
 import { BsGlobe } from "react-icons/bs"
 import { AiOutlineMail } from "react-icons/ai"
 import { Link } from 'react-router-dom';
-import { BiCamera } from 'react-icons/bi';
-import ToolTip from '../comman/ToolTip';
 import Avatar from './Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { followUser, setCurrentProfilePic, unfollowUser, updateProfile } from '../../redux/features/userSlice';
-import { updateAuthProfile } from '../../redux/features/authSlice';
+import { followUser, unfollowUser } from '../../redux/features/userSlice';
+
 import EditProfile from './EditProfile';
 import { isFollowed } from '../../utils';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const ProfileCard = ({ user }) => {
 	const dispatch = useDispatch()
-	const { auth, } = useSelector(state => state);
+	const { auth, post:{currentUsersPosts} } = useSelector(state => state);
 	const { profileAvatar, fullName, username, followers, following, website, email, bio, _id } = user
 	const [display, setDisplay] = useState({
 		upload: false,
@@ -22,7 +20,7 @@ const ProfileCard = ({ user }) => {
 		edit: false,
 	})
 
-	console.log("followers", followers)
+
 	const isUserFolowing = isFollowed(followers, auth.user.id)
 	const [currentProfilePic, setCurrentProfilePic] = useState(profileAvatar)
 
@@ -73,7 +71,7 @@ const ProfileCard = ({ user }) => {
 			</div>
 			<div className='flex w- justify-between  items-center'>
 
-				<p className=''><span className='text-black font-semibold mr-2'>224</span> Posts</p>
+				<p className=''><span className='text-black font-semibold mr-2'>{ currentUsersPosts && currentUsersPosts.length}</span> Posts</p>
 				<p><span className='text-black font-semibold mr-2 '>{followers && followers.length}</span> Followers</p>
 				<p><span className='text-black font-semibold mr-2 '>{following && following.length}</span> Following</p>	   </div>
 			<div className='flex flex-col gap-2'><p className="text-lg  font-semibold mr-2">{fullName}</p>

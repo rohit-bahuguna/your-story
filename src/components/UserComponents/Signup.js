@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { signUpHandler } from '../../redux/features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { LiaEyeSlash, LiaEyeSolid } from 'react-icons/lia';
 import { Spinner } from 'flowbite-react';
 
@@ -10,7 +9,7 @@ const Signup = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState(false)
-	const { isLoading, error, status } = useSelector(state => state.auth);
+	const { isLoading } = useSelector(state => state.auth);
 	const [authData, setAuthData] = useState({
 		email: '',
 		password: '',
@@ -28,11 +27,7 @@ const Signup = () => {
 		}
 	};
 
-	useEffect(() => {
-		if (status) {
-			navigate('/posts');
-		}
-	}, [status]);
+
 
 	return <div className="flex justify-center md:items-center  h-screen p-5 w-screen">
 		<section className="hidden   w-[40%]   md:inline">

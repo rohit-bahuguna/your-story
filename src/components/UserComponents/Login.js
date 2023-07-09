@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { loginHandler } from '../../redux/features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { LiaEyeSlash, LiaEyeSolid } from "react-icons/lia"
-import { Link, useNavigate } from 'react-router-dom';
-import { Spinner } from 'flowbite-react';
+import { Link } from 'react-router-dom';
+import Spinner from '../comman/Spinner';
 
 
 const Login = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { isLoading, error, status } = useSelector(state => state.auth);
+
+	const { isLoading } = useSelector(state => state.auth);
 	const [authData, setAuthData] = useState({
 		email: '',
 		password: ''
@@ -19,24 +19,26 @@ const Login = () => {
 		setAuthData({ ...authData, [e.target.name]: e.target.value });
 	};
 
-	const userLogin = (e, role) => {
-		e.preventDefault();
-		if (role === "guest") {
-			setAuthData({
-				password: 'guestuser',
-				email: "guestuser@gmail.com",
-			})
-
-		}
+	const userLogin = (e) => {
+		e.preventDefault()
 		dispatch(loginHandler(authData))
 
 	};
 
-	useEffect(() => {
-		if (status) {
-			navigate('/posts');
-		}
-	}, [status]);
+	const guestLogin = (e) => {
+		e.preventDefault()
+		setAuthData({
+			password: 'guestuser',
+			email: "guestuser@gmail.com",
+		})
+
+		dispatch(loginHandler({
+			password: 'guestuser',
+			email: "guestuser@gmail.com",
+		}))
+	}
+
+
 
 	return (
 		<div className="flex justify-center md:items-center  h-screen  ">
@@ -91,7 +93,8 @@ const Login = () => {
 					<div className="flex  gap-5 self-center items-center">
 						<button
 							className="botton"
-							onClick={(e) => userLogin(e, 'user')}>
+							onClick={userLogin}
+							disabled={isLoading}>
 							{isLoading
 								? <Spinner />
 								: 'Login'}
@@ -99,13 +102,16 @@ const Login = () => {
 						<span className="text-lg text-gray-500">or</span>
 						<button
 							className="botton"
-							onClick={(e) => userLogin(e, 'guest')}>
+							onClick={guestLogin}
+							disabled={isLoading}
+						>
 							{isLoading
 								? <Spinner />
 								: 'Login as Guest'}
+
 						</button>
 					</div>
-					<div className="px-7">
+					<div className="">
 						<p>
 							New Here ?{' '}
 							<Link to="/signup">

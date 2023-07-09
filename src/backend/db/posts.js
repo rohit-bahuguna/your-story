@@ -13,7 +13,7 @@ export const posts = [
 		likes: { likeCount: 0, likedBy: [], dislikedBy: [], },
 		postBy: {
 			fullName: 'Rohit Bahuguna',
-			email: 'rohit@gmail.com',
+			email: 'rohitbahuguna.work@gmail.com',
 			username: 'rohitbahuguna',
 			profileAvatar: 'https://res.cloudinary.com/dfbd4lyqe/image/upload/v1677586788/Recipe/thumbnails/v2dhmqmyspj0tlh0cl50.png',
 		},
