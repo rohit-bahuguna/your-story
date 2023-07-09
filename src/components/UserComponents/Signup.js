@@ -3,7 +3,9 @@ import { signUpHandler } from '../../redux/features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LiaEyeSlash, LiaEyeSolid } from 'react-icons/lia';
-import { Spinner } from 'flowbite-react';
+import Spinner from '../comman/Spinner';
+import { useForm } from 'react-hook-form';
+
 
 const Signup = () => {
 	const dispatch = useDispatch();
@@ -19,12 +21,17 @@ const Signup = () => {
 		setAuthData({ ...authData, [e.target.name]: e.target.value });
 	};
 
-	const userSignup = e => {
-		e.preventDefault();
-		console.log(authData);
-		if (authData.email && authData.password && authData.name) {
-			dispatch(signUpHandler(authData));
-		}
+	const { register, handleSubmit, formState: { errors } } = useForm();
+
+	console.log(errors);
+
+	const userSignup = (data) => {
+		console.log(data)
+	// e.preventDefault();
+	// console.log(authData);
+	// if (authData.email && authData.password && authData.name) {
+	// 	dispatch(signUpHandler(authData));
+	// }
 	};
 
 
@@ -50,12 +57,13 @@ const Signup = () => {
 					</label>
 					<input
 						type="text"
-						name="name"
-						value={authData.name}
-						onChange={getUserAuthData}
+
+						// value={authData.name}
+						// onChange={getUserAuthData}
 						className="input"
 						placeholder="Enter Your Full Name"
-						required
+						{...register("name", { required: true, maxLength: 80 })}
+
 					/>
 				</div>
 				<div className="">
@@ -66,12 +74,11 @@ const Signup = () => {
 					</label>
 					<input
 						type="email"
-						name="email"
-						value={authData.email}
-						onChange={getUserAuthData}
+						// value={authData.email}
+						// onChange={getUserAuthData}
 						className="input"
 						placeholder="Enter Your Email"
-						required
+						{...register("email", { required: true, pattern: /^\S+@\S+$/i })}
 					/>
 				</div>
 				<div className="relative">
@@ -82,13 +89,16 @@ const Signup = () => {
 					</label>
 					<input
 						type={showPassword ? "text" : "password"}
-						name="password"
-						value={authData.password}
-						onChange={getUserAuthData}
+						// value={authData.password}
+						// onChange={getUserAuthData}
 						placeholder="Enter Your Password"
 						className="input
 						"
-
+						{...register("password", {
+							required: { value: true, message: "Please Enter Password" }, min: {
+								value: 8, message: "Password should be atlest 8 char"
+							}, pattern: { value: /^\S+@\S+$/i, message: "test" }
+						})}
 						required
 					/>
 					{showPassword ? <LiaEyeSolid className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
@@ -98,7 +108,7 @@ const Signup = () => {
 				<div className="flex  gap-5 self-center items-center">
 					<button
 						className="botton"
-						onClick={userSignup}>
+						onClick={handleSubmit(userSignup)}>
 						{isLoading
 							? <Spinner />
 							: 'Signup'}

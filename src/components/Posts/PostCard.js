@@ -13,7 +13,6 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { useOutsideClick } from "../../hooks/useOutsideClick"
 
 import { isLiked } from '../../utils';
-import EmojiPicker from 'emoji-picker-react';
 const PostCard = ({ post }) => {
 	const {
 		_id,
@@ -66,7 +65,7 @@ const PostCard = ({ post }) => {
 		<div className="flex md:w-[30vw] flex-col gap-5 border rounded-md px-2 py-3 ">
 			<div className="flex justify-between  px-3 relative">
 				<div className="flex  gap-2">
-					<img src={user.email === email ? user.profileAvatar : profileAvatar} alt={fullName} className="h-12 rounded-full" />
+					<img src={user.email === email ? user.profileAvatar : profileAvatar} alt={fullName} className="h-12 aspect-square rounded-full" />
 					<div>
 						<h1>
 							{fullName}
@@ -122,11 +121,11 @@ const PostCard = ({ post }) => {
 				</p>
 			</div>
 			<div className="flex flex-col gap-2">
-				<Link to={`/post/${_id}`}>
+				{comments.length > 0 && <Link to={`/post/${_id}`}>
 					<p onClick={() => dispatch(getSinglePost(_id))}>
 						view all {comments.length} comments
 					</p>
-				</Link>
+				</Link>}
 				<div className=" hidden md:flex justify-between items-center">
 					<input
 						type="text"
@@ -144,8 +143,7 @@ const PostCard = ({ post }) => {
 						>
 							Post
 						</button>
-						<HiOutlineEmojiHappy className="inline ml-3" />
-						<EmojiPicker/>
+
 					</div>
 				</div>
 			</div>

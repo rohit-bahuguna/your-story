@@ -5,14 +5,13 @@ import { getAllPosts } from '../../redux/features/postSlice';
 import PostCard from './PostCard';
 import { AiTwotoneFire } from 'react-icons/ai';
 import { RiExpandUpDownFill } from 'react-icons/ri';
-import { ToastContainer, toast } from 'react-toastify';
 import { sortByDate, sortByTranding } from '../../redux/features/postSlice';
 import Loader from '../comman/Loader';
 const Posts = () => {
 	const [active, setActive] = useState("latest");
 	const dispatch = useDispatch();
 	const {
-		post: { posts, totalPosts, isLoading, message, error }
+		post: { posts, isLoading, }
 	} = useSelector(state => state);
 
 	useEffect(() => {
@@ -20,19 +19,12 @@ const Posts = () => {
 		dispatch(getAllUsers());
 	}, []);
 
-	useEffect(
-		() => {
-			if (message !== '') {
-				toast.success(message, { autoClose: 1000 });
-			}
-		},
-		[message]
-	);
+
 
 	return (
-		<div className="flex flex-col gap-10 md:gap-20   justify-center items-center px-5  md:pt-2">
-			<ToastContainer />
-			<div className="absolute top-0 flex  justify-center items-center gap-10  mt-16  py-5 w-1/4">
+		<div className="flex flex-col gap-10   justify-center items-center px-5  ">
+
+			<div className="flex   justify-center items-center gap-10   w-1/4">
 
 
 				<p

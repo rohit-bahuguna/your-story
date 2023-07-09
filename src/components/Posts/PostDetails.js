@@ -58,11 +58,11 @@ const PostDetails = () => {
 
 	return (
 		<Layout>
-			<div className="flex md:flex-row flex-col gap-5 mb-[10vh] px-3 md:mt-3 h-screen md:mb-0 justify-center  w-screen  md:w-[83vw] overflow-y-scroll">
+			<div className="flex md:flex-row flex-col gap-5  border border-red-500  mb-[10vh] md:px-3 md:mt-3 h-screen md:mb-0 justify-center  w-screen  md:w-[83vw] overflow-y-scroll">
 				<div className='w-screen md:w-[45%] '>
 					<div className="flex border-b md:hidden px-2 justify-between  py-2">
 						<div className="flex gap-2">
-							<img src={profileAvatar} alt={fullName} className="h-10 pr-2 rounded-full" />
+							<img src={profileAvatar} alt={fullName} className="h-12 aspect-square  rounded-full" />
 							<div>
 								<h1>
 									{fullName}
@@ -72,12 +72,12 @@ const PostDetails = () => {
 						</div>
 						<FiMoreHorizontal className=" self-center text-2xl" />
 					</div>
-					<img src={postImage} alt="" />
+					<img src={postImage} alt="" className='' />
 				</div>
 				<div className="md:w-1/2 w-screen  px-2 md:px-0 flex flex-col gap-5">
 					<div className="md:flex border-b hidden  justify-between  py-2">
 						<div className="flex gap-2">
-							<img src={profileAvatar} alt={fullName} className="h-10 pr-2 rounded-full" />
+							<img src={profileAvatar} alt={fullName} className="h-12 aspect-square  rounded-full" />
 							<div>
 								<h1>
 									{fullName}
@@ -88,7 +88,7 @@ const PostDetails = () => {
 						<FiMoreHorizontal className=" self-center text-2xl" />
 					</div>
 					<div className="flex  gap-2">
-						<img src={profileAvatar} alt={fullName} className="h-10 pr-2 rounded-full" />
+						<img src={profileAvatar} alt={fullName} className="h-12  rounded-full aspect-square" />
 						<div>
 							<h1>
 								{fullName}
@@ -107,7 +107,7 @@ const PostDetails = () => {
 											<img
 												src={profilePicture}
 												alt={name}
-												className="h-10 rounded-full"
+												className="h-12 rounded-full aspect-square"
 											/>
 											<div className='flex flex-col gap-1'>
 												<p>

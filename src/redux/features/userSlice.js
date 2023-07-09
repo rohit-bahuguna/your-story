@@ -11,7 +11,7 @@ import {
 } from "../../services/userServices";
 
 import { getSearchedUser } from "../../utils/getSearchedUser";
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export const getAllUsers = createAsyncThunk(
     "user/getAllUsers",
@@ -184,23 +184,23 @@ export const userSlice = createSlice({
             );
             state.currentUser = payload
             state.isLoading = false;
-            toast.success("Profile updated successfully", { autoClose: 1000 })
+            toast.success("Profile updated successfully")
         },
 
         [updateProfile.rejected]: (state, { payload }) => {
-            console.log(payload)
             state.isLoading = false;
+            toast.error("Something went wrong")
+
         },
 
         [getBookmarks.fulfilled]: (state, { payload: { bookmarks, message } }) => {
-            console.log("bookmarks", bookmarks)
             state.bookmarks = bookmarks;
-            toast.success(message, { autoClose: 1000 })
+            toast.success(message)
         },
 
         [addBookmark.fulfilled]: (state, { payload: { bookmarks, message } }) => {
             state.bookmarks = bookmarks;
-            toast.success(message, { autoClose: 1000 })
+            toast.success("added to bookmark")
 
         },
         [addBookmark.rejected]: (state, { payload }) => {
@@ -209,14 +209,14 @@ export const userSlice = createSlice({
 
         [removeBookmark.fulfilled]: (state, { payload: { bookmarks, message } }) => {
             state.bookmarks = bookmarks;
-            toast.success(message, { autoClose: 1000 })
+            toast.success("removed from bookmark",)
         },
 
         [followUser.fulfilled]: (state, { payload: { user, followUser, message } }) => {
             state.users = updateFollowingUser(state.users, user);
             state.users = updateFollowedUser(state.users, followUser);
             state.currentUser = filterCurrentUser(state.users, state.currentUser.email)
-            toast.success(message, { autoClose: 1000 })
+            toast.success(message)
 
         },
 
@@ -224,7 +224,7 @@ export const userSlice = createSlice({
             state.users = updateFollowingUser(state.users, user);
             state.users = updateFollowedUser(state.users, followUser);
             state.currentUser = filterCurrentUser(state.users, state.currentUser.email)
-            toast.success(message, { autoClose: 1000 })
+            toast.success(message)
         },
     },
 });

@@ -12,7 +12,7 @@ import {
   editCommentService,
   deleteCommentService,
 } from "../../services/postServices";
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -253,17 +253,18 @@ extraReducers: {
 
     [createPost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      toast.success("Post created succesfully", { id: state.loadingId });
+      toast.success("New Post Created ");
     },
     [createPost.rejected]: (state, { payload }) => {
       state.error = payload;
+      toast.error("Something Went Wrong , try again");
+
     },
 
     [editPost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.isLoading = false
-      console.log(payload)
-    //   toast.success("Post updated", { id: state.loadingId });
+      toast.success("Post Updated");
   },
   [editPost.pending]: (state) => {
 
@@ -273,11 +274,13 @@ extraReducers: {
     [editPost.rejected]: (state, { payload }) => {
       state.error = payload;
       console.log(payload)
+      toast.error(payload);
+
     },
 
     [deletePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      toast.success("Post Deleted", { autoClose: 1000 })
+      toast.success("Post Deleted")
     },
   [deletePost.rejected]: (state, { payload }) => {
     console.log(payload)
@@ -287,15 +290,18 @@ extraReducers: {
     [likePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
-
+      toast.success("👍")
     },
     [likePost.rejected]: (state, { payload }) => {
       console.log(payload)
+
     },
 
     [dislikePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      toast.success("👎")
+
     },
     [dislikePost.rejected]: (state, { payload }) => {
       state.error = payload;
@@ -304,15 +310,20 @@ extraReducers: {
     [addComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      toast.success("New Comment Added")
 
     },
     [editComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      toast.success("Comment Updated")
+
     },
     [deleteComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      toast.success("Comment Deleted")
+
     },
   },});
 

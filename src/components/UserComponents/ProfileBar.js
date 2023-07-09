@@ -19,7 +19,7 @@ const ProfileBar = () => {
 			<div className='flex justify-between items-center px-3 border rounded-lg py-2'>
 				<Link to={`/profile/${user?.email}`}>
 					<div onClick={() => dispatch(getCurrentUser(user?.email))}>
-						<img src={user.profileAvatar == "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" : user.profileAvatar} alt={user?.fullName} className='w-12 rounded-full' />
+						<img src={user.profileAvatar == "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" : user.profileAvatar} alt={user?.fullName} className='w-12 aspect-square rounded-full ' />
 					</div>
 				</Link>
 				<div>
@@ -69,7 +69,7 @@ const ProfileCard = ({ user: { id, _id, profileAvatar, fullName, username, email
 
 			<Link to={`/profile/${email}`}>
 				<div className="flex gap-2">
-					<img src={profileAvatar} alt={username} className='w-12 rounded-full' />
+					<img src={profileAvatar} alt={username} className='w-12   aspect-square rounded-full' />
 					<div>
 						<p className='font-semibold'>
 							{fullName}

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { loginService, signUpService } from '../../services/authServices';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export const loginHandler = createAsyncThunk(
 	'auth/loginHandler',
@@ -50,7 +50,7 @@ export const userSlice = createSlice({
 			state.isLoading = false;
 			state.user = {};
 			state.error = false;
-			toast.success('logout successfully');
+			toast.success('logout successfully', { className: "text-red-500" });
 		},
 		updateAuthProfile: (state, { payload }) => {
 
@@ -70,7 +70,7 @@ export const userSlice = createSlice({
 			state,
 			{ payload: { encodedToken, foundUser, message } }
 		) => {
-			toast.success(message, { autoClose: 1000 });
+
 			state.isLoading = false;
 			state.error = false;
 			state.user = {
@@ -78,11 +78,13 @@ export const userSlice = createSlice({
 				...foundUser
 			};
 			state.status = true;
+			toast.success(message);
 		},
 		[loginHandler.rejected]: (state, { payload }) => {
 			state.isLoading = false;
 			state.error = true;
-			toast.error(payload, { autoClose: 1000 });
+			console.log(payload)
+			toast.error(payload || "Something Went Wrong");
 		},
 		// signup
 		[signUpHandler.pending]: state => {
@@ -92,16 +94,17 @@ export const userSlice = createSlice({
 			state,
 			{ payload: { encodedToken, createdUser, message } }
 		) => {
-			toast.success(message, { autoClose: 1000 })
+
 			state.isLoading = false;
 			state.user = { token: encodedToken, ...createdUser, profileAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" };
 			state.status = true;
+			toast.success(message)
 		},
 		[signUpHandler.rejected]: (state, { payload }) => {
 			console.log(payload);
 			state.isLoading = false;
 			state.error = true;
-			toast.error(payload, { autoClose: 1000 });
+			toast.error(payload);
 		}
 	}
 });

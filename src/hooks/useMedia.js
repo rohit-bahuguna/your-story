@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 
 function useMedia() {
@@ -25,6 +25,7 @@ function useMedia() {
             try {
                 const response = await fetch(url, requestOptions)
                 const result = await response.json()
+                toast.success(`${mediaType} Added`)
                 return { secure_url: result.secure_url, delete_token: result.delete_token }
 
 

@@ -1,5 +1,4 @@
 import './App.css';
-import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
 import Login from './components/UserComponents/Login';
 import Signup from './components/UserComponents/Signup';
@@ -7,20 +6,22 @@ import Explore from './components/Explore';
 import Search from './components/Search';
 import PostDetails from './components/Posts/PostDetails';
 import Home from './components/Home';
-import { ToastContainer } from 'react-toastify';
-import Modal from './components/comman/Modal';
 import Profile from "./components/profile/Profile"
 import PageNotFound from './components/comman/PageNotFound';
 import { BookMark } from './pages';
 import EditPost from './components/Posts/EditPost';
 import CreatePost from './components/CreatePost';
 import PrivateRoute, { IsAuthenticated } from './components/comman/PrivateRoute';
+import { Toaster } from 'react-hot-toast';
 
 
 function App() {
 	return (
 		<>
-			<ToastContainer />
+			<Toaster
+				position="top-center"
+				reverseOrder={false}
+			/>
 			<Routes>
 
 				<Route path='*' element={<PageNotFound />} />

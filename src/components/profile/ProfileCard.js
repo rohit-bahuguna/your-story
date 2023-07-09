@@ -45,12 +45,12 @@ const ProfileCard = ({ user }) => {
 	const profileRef = useRef(null)
 	useOutsideClick(profileRef, () => setDisplay({ ...display, edit: false }))
 
-	return <div className="flex justify-evenly items-center flex-col md:flex-row relative z-10 md:w-[50vw] w-screen " >
+	return <div className="flex justify-evenly items-center flex-col md:flex-row relative  md:w-[50vw] w-screen " >
 
 		<div className=' relative'
 
 		>
-			<img src={profileAvatar == "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" : profileAvatar} alt={fullName} className='md:w-56 rounded-full ' />
+			<img src={profileAvatar == "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5fVJf_A_8CxQnzHFw4qV9LejNulQNoCoMCZq3nCdtcHcQCb8GVZfq3K8bx66lCDNy6ttCX2cbak&usqp=CAU&ec=48600112" : profileAvatar} alt={fullName} className='w-56 aspect-square	 rounded-full ' />
 
 		</div>
 		<div className="flex flex-col  gap-5 w-screen px-5 md:w-1/2">
