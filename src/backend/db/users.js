@@ -51,7 +51,7 @@ export const users = [
 		password: 'kabbu@123',
 		bio: 'Hey there, i am kabbu i look dumb , but i am smart ',
 		website: '',
-		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688569144/your_story/profile/dkhdjb9zm9qhgzohyiqk.jpg',
+		profileAvatar: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688914589/your_story/post/kntp6pxsyxubkufdpfpf.jpg',
 		createdAt: "2023-06-27T09:32:39+05:30",
 		updatedAt: "2023-06-27T09:32:39+05:30",
 		following: [
