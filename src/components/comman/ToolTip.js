@@ -6,7 +6,7 @@ const ToolTip = ({ children, content, placement }) => {
         <Tooltip
             content={content}
             placement={placement}
-            className="bg-white"
+            className=""
         >
             {children}
         </Tooltip >

@@ -134,6 +134,7 @@ export function makeServer({ environment = "development" } = {}) {
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/video/upload`,
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/delete_by_token`,
+        'https://api.cloudinary.com/v1_1/dqblmzhhm/resources/image',
         ["post"]
       );
     },

@@ -11,8 +11,7 @@ import { isInBookmarks } from '../../utils/postInBookmarks';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useOutsideClick } from "../../hooks/useOutsideClick"
-
-import { isLiked } from '../../utils';
+import { getTimeAgo, isLiked } from '../../utils';
 const PostCard = ({ post }) => {
 	const {
 		_id,
@@ -21,7 +20,8 @@ const PostCard = ({ post }) => {
 		postImage,
 		content,
 		likes: { likeCount, likedBy },
-		comments
+		comments,
+		createdAt
 	} = post;
 	const { auth: { user }, user: { bookmarks } } = useSelector(state => state)
 
@@ -70,7 +70,9 @@ const PostCard = ({ post }) => {
 						<h1>
 							{fullName}
 						</h1>
-						<p className="text-gray-400 ">1h</p>
+						<p className="text-gray-400 ">
+							{getTimeAgo(createdAt)}
+						</p>
 					</div>
 				</div>
 				<FiMoreHorizontal className=" self-center text-2xl hover:cursor-pointer hover:text-indigo-700" onClick={() => setShowMore(!showMore)} />
@@ -121,11 +123,20 @@ const PostCard = ({ post }) => {
 				</p>
 			</div>
 			<div className="flex flex-col gap-2">
-				{comments.length > 0 && <Link to={`/post/${_id}`}>
-					<p onClick={() => dispatch(getSinglePost(_id))}>
-						view all {comments.length} comments
+				{comments.length > 0 ? <Link to={`/post/${_id}`}>
+					<p className='hover:text-sky-500' onClick={() => dispatch(getSinglePost(_id))}>
+						{
+							comments.length === 1 ? `view ${comments.length} comment` : `view all ${comments.length} comments`
+						}
 					</p>
-				</Link>}
+				</Link>
+					: <Link to={`/post/${_id}`}>
+						<p className='hover:text-sky-500' onClick={() => dispatch(getSinglePost(_id))}>
+							view Post
+						</p>
+					</Link>
+
+				}
 				<div className=" hidden md:flex justify-between items-center">
 					<input
 						type="text"

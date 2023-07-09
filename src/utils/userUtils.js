@@ -3,5 +3,9 @@ export const isFollowed = (followers, userId) => {
 }
 
 export const getUserFollowing = (users, id) => {
-    return users.reduce((following, user) => user.id === id ? [...following, ...user.following] : following, [])
+    const followingUser = users.reduce((following, user) => user.id === id ? [...following, ...user.following] : following, [])
+    const followingUserEmails = followingUser.reduce((followingUserEmail, user) => [...followingUserEmail, user.email], [])
+
+    return { followingUserEmails, followingUser }
+
 }

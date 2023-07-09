@@ -1,3 +1,5 @@
+export { getTimeAgo } from "./postUtils"
+
 export { getUserFollowing } from "./userUtils"
 
 export { isFollowed } from "./userUtils"

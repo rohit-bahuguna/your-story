@@ -7,7 +7,7 @@ import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import Layout from "../comman/Layout"
 import { isInBookmarks } from '../../utils/postInBookmarks';
-import { isLiked } from '../../utils';
+import { getTimeAgo, isLiked } from '../../utils';
 import Loader from "../comman/Loader"
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { addComment, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
@@ -41,15 +41,17 @@ const PostDetails = () => {
 	const postLikedByUser = isLiked(postDetails?.likes?.likedBy, user.email)
 
 	const likeOrDislikePost = () => {
-		postLikedByUser ? dispatch(dislikePost({ token: user.token, postId })) : dispatch(likePost({ token: user.token, postId }))
+		postLikedByUser ? dispatch(dislikePost({ token: user.token, _id: postId })) : dispatch(likePost({ token: user.token, _id: postId }))
 	}
 
 	const bookmarkPost = () => {
-		postIsInBookmark ? dispatch(removeBookmark({ token: user.token, postId })) : dispatch(addBookmark({ token: user.token, postId }))
+		postIsInBookmark ? dispatch(removeBookmark({ token: user.token, _id: postId })) : dispatch(addBookmark({ token: user.token, _id: postId }))
 
 	}
 
-
+	useEffect(() => {
+		dispatch(getSinglePost(postId))
+	}, [postId])
 
 
 
@@ -64,7 +66,12 @@ const PostDetails = () => {
 								<h1>
 									{postDetails?.postBy.fullName}
 								</h1>
-								<p className="text-gray-400 ">1h</p>
+								<p className="text-gray-400 ">
+
+									{
+										getTimeAgo(postDetails?.createdAt)
+									}
+								</p>
 							</div>
 						</div>
 						<FiMoreHorizontal className=" self-center text-2xl" />
@@ -79,7 +86,12 @@ const PostDetails = () => {
 								<h1>
 									{postDetails?.postBy.fullName}
 								</h1>
-								<p className="text-gray-400 ">1h</p>
+								<p className="text-gray-400 ">
+
+									{
+										getTimeAgo(postDetails?.createdAt)
+									}
+								</p>
 							</div>
 						</div>
 						<FiMoreHorizontal className=" self-center text-2xl" />
@@ -111,7 +123,9 @@ const PostDetails = () => {
 													<span className='text-lg font-semibold mr-2'>{name}</span> <span>{message}</span>
 												</p>
 												<div className='flex gap-2 items-center'>
-													<span>1d</span>
+													<span>{
+														getTimeAgo(createdAt)
+													}</span>
 													<span>7 likes</span>
 													{email === user.email &&
 														<FiMoreHorizontal class />}

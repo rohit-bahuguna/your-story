@@ -8,14 +8,15 @@ const ProfileBar = () => {
 	const { user } = useSelector(state => state.auth);
 	const { users } = useSelector(state => state.user)
 	const dispatch = useDispatch()
-
+	const { followingUserEmails } = getUserFollowing(users, user.id)
 	useState(() => {
-		const following = getUserFollowing(users, user.id)
-		dispatch(updateAuthFollowing(following))
+		const { followingUser }
+			= getUserFollowing(users, user.id)
+		dispatch(updateAuthFollowing(followingUser))
 	}, [users])
 
 	return (
-		<div className="flex flex-col gap-3 mt-12   w-screen px-10 pl-5">
+		<div className="flex flex-col gap-3    w-screen px-10 pl-5">
 			<div className='flex justify-between items-center px-3 border rounded-lg py-2'>
 				<Link to={`/profile/${user?.email}`}>
 					<div onClick={() => dispatch(getCurrentUser(user?.email))}>
@@ -40,7 +41,7 @@ const ProfileBar = () => {
 				<div className=" flex flex-col gap-5">
 					{
 						users && users.map((singleUser) => {
-							if (user.email !== singleUser.email) {
+							if (user.email !== singleUser.email && !followingUserEmails.includes(singleUser.email)) {
 								return <ProfileCard key={singleUser._id} user={singleUser} />
 							}
 						})

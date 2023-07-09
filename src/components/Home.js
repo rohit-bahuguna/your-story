@@ -13,7 +13,7 @@ const Home = () => {
 	return (
 		<Layout>
 			<div className="flex  md:w-[82.80vw] w-screen justify-center  mb-14">
-				<div className="flex  justify-center md:w-3/4 z-0 ">
+				<div className="flex  justify-center items-start md:w-3/4 z-0 ">
 					<Posts />
 				</div>
 				<div className=" w-1/3 hidden md:flex  ">

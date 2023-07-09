@@ -22,9 +22,9 @@ const Posts = () => {
 
 
 	return (
-		<div className="flex flex-col gap-10   justify-center items-center px-5  ">
+		<div className="flex flex-col  gap-10   justify-center items-center px-5  ">
 
-			<div className="flex   justify-center items-center gap-10   w-1/4">
+			<div className="flex   justify-center  gap-10   w-1/4">
 
 
 				<p
@@ -59,7 +59,7 @@ const Posts = () => {
 					</div>
 				</p>
 			</div>
-			<div>
+			<div className=''>
 				{isLoading
 					? <Loader/>
 					: <div className="flex flex-col gap-5">
