@@ -5,7 +5,7 @@ import { MdFavorite } from 'react-icons/md';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
+import { addComment, deletePost, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
 import { addBookmark, removeBookmark } from '../../redux/features/userSlice';
 import { isInBookmarks } from '../../utils/postInBookmarks';
 import { BsFillBookmarkFill } from 'react-icons/bs';
@@ -13,6 +13,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { useOutsideClick } from "../../hooks/useOutsideClick"
 
 import { isLiked } from '../../utils';
+import EmojiPicker from 'emoji-picker-react';
 const PostCard = ({ post }) => {
 	const {
 		_id,
@@ -24,6 +25,14 @@ const PostCard = ({ post }) => {
 		comments
 	} = post;
 	const { auth: { user }, user: { bookmarks } } = useSelector(state => state)
+
+	const [commentData, setCommentData] = useState({
+		message: '',
+		name: user.fullName,
+		email: user.email,
+		profilePicture: user.profileAvatar
+	})
+
 	const dispatch = useDispatch()
 	const postIsInBookmark = isInBookmarks(bookmarks, post._id)
 	const postLikedByUser = isLiked(likedBy, user.email)
@@ -78,7 +87,7 @@ const PostCard = ({ post }) => {
 							</Link>
 						</>}
 						{email !== user.email && <>
-							<p className='more '>Add To Bookmark</p>
+							<p className='more ' onClick={bookmarkPost} >Add To Bookmark</p>
 						</>}
 						<Link to={`/post/${_id}`}>
 							<p className='more'>Go To Post</p>
@@ -123,12 +132,20 @@ const PostCard = ({ post }) => {
 						type="text"
 						placeholder="Add a comment"
 						className="bg-white  focus:outline-none focus:ring-0"
+						onChange={(e) => setCommentData({ ...commentData, message: e.target.value })}
+						value={commentData.message}
 					/>
 					<div>
-						<button className="text-sky-600 px-2 rounded-full hover:bg-gray-300">
+						<button className="text-sky-600 px-2 rounded-full hover:bg-gray-300"
+							onClick={() => {
+								dispatch(addComment({ postId: _id, commentData, token: user.token }))
+								setCommentData({ ...commentData, message: "" })
+							}}
+						>
 							Post
 						</button>
 						<HiOutlineEmojiHappy className="inline ml-3" />
+						<EmojiPicker/>
 					</div>
 				</div>
 			</div>
