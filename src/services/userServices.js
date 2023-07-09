@@ -6,7 +6,6 @@ export const getAllUserService = () => {
 
 export const updateProfileService = ({ token, ...rest }) => {
 
-  console.log("rest", rest, token)
   return axios.post(
     "/api/users/edit",
     { userData: rest },

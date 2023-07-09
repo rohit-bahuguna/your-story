@@ -35,7 +35,6 @@ const PostDetails = () => {
 
 
 
-	console.log(postDetails)
 	const [focus, setFocus] = useState(false)
 
 	const postIsInBookmark = isInBookmarks(bookmarks, postId)

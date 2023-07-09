@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 const PrivateRoute = () => {
     const { status } = useSelector(state => state.auth)
     const navigate = useNavigate()
-    console.log(status)
+
 
     useEffect(() => {
         if (!status) {

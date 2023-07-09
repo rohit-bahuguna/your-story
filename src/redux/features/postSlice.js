@@ -21,7 +21,7 @@ export const getAllPosts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data, status } = await getAllPostsService();
-console.log(data)
+
       if (status === 200) {
         return data.posts;
       }
@@ -65,7 +65,7 @@ export const editPost = createAsyncThunk(
   "post/editPost",
   async (arg, { rejectWithValue }) => {
     try {
-      console.log(arg)
+
       const { data, status } = await editPostService(arg);
 
       if (status === 201) {
@@ -106,7 +106,7 @@ export const likePost = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+     
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -124,7 +124,7 @@ export const dislikePost = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+     
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -140,7 +140,7 @@ export const addComment = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+     
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -245,7 +245,7 @@ extraReducers: {
     },
     [getSinglePost.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload)
+      
       state.postDetails = payload;
     },
     [getSinglePost.rejected]: (state) => {
@@ -274,7 +274,7 @@ extraReducers: {
   },
     [editPost.rejected]: (state, { payload }) => {
       state.error = payload;
-      console.log(payload)
+      
       toast.error(payload);
 
     },
@@ -284,7 +284,7 @@ extraReducers: {
       toast.success("Post Deleted")
     },
   [deletePost.rejected]: (state, { payload }) => {
-    console.log(payload)
+    
     // state.error = payload;
     },
 
@@ -294,7 +294,7 @@ extraReducers: {
       toast.success("👍")
     },
     [likePost.rejected]: (state, { payload }) => {
-      console.log(payload)
+      
 
     },
 

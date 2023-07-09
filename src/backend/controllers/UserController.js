@@ -147,7 +147,7 @@ export const bookmarkPostHandler = function (schema, request) {
 
     const newUser = { ...user, bookmarks: [...user.bookmarks, { _id: post._id, postImage: post.postImage, comments: post.comments, likes: { likeCount: post.likes.likeCount } }] }
 
-    console.log(newUser)
+
 
     this.db.users.update(
       { _id: newUser._id },

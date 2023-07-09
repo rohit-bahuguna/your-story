@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,14 +19,13 @@ const CreatePost = ({ postId }) => {
 		},
 		auth: { user: { token, fullName, email, username, profileAvatar } }
 	} = useSelector(state => state);
-
 	const { uploadMedia, deleteMedia } = useMedia();
 
 	const [toggleEmaoji, setToggleEmoji] = useState(false);
 
 	const [isUploadingMedia, setIsUploadingMedia] = useState(false)
 
-	const [postData, setPostData] = useState(postId ? postDetails : {
+	const [postData, setPostData] = useState({
 		postImage: "/placeholder.png",
 		content: "",
 		postBy: {
@@ -37,6 +36,12 @@ const CreatePost = ({ postId }) => {
 		},
 		postVideos: [],
 	});
+
+	useEffect(() => {
+		if (postId) {
+			setPostData(postDetails)
+		}
+	}, [isLoading])
 	console.log(postData)
 	const [newPostImage, setNewPostImage] = useState()
 	const [deleteToken, setDeleteToken] = useState()
@@ -56,7 +61,7 @@ const CreatePost = ({ postId }) => {
 
 				const deleted = await deleteMedia(deleteToken)
 
-				console.log(deleted)
+
 
 				if (deleted) {
 					setDeleteToken(null)
@@ -65,7 +70,7 @@ const CreatePost = ({ postId }) => {
 			};
 
 			setNewPostImage(e.target.files[0].name);
-			console.log(e.target.files)
+
 
 
 			setIsUploadingMedia(true)
@@ -87,7 +92,7 @@ const CreatePost = ({ postId }) => {
 
 	return (
 		<Layout>
-			<div className='flex w-screen justify-center md:w-[83vw] max-h-[90vh]   z-20  items-center '>
+			{!isLoading && <div className='flex w-screen justify-center md:w-[83vw] max-h-[90vh]   z-20  items-center '>
 				<div className="flex flex-col  md:mt-0 mt-5  ">
 					<div className="flex flex-col   ">
 						{!postId && <div className="flex  w-screen md:w-full justify-between items-center px-5 py-1">
@@ -174,7 +179,13 @@ const CreatePost = ({ postId }) => {
 						>Cancel</button>
 					</div>}
 				</div>
-			</div>
+			</div>}
+
+			{
+				isLoading && <div className='flex justify-center  w-screen px-5 md:w-[83vw] items-center'>
+					<Loader />
+				</div>
+			}
 		</Layout>
 	);
 };

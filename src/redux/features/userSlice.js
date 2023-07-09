@@ -23,7 +23,7 @@ export const getAllUsers = createAsyncThunk(
             }
         } catch (error) {
 
-            console.log(error.response.data.error)
+
             return rejectWithValue(error.response.data.error);
         }
     }
@@ -86,7 +86,7 @@ export const followUser = createAsyncThunk(
             }
 
         } catch (error) {
-            console.log(error.response.data)
+
             return rejectWithValue([], "Error occured. Try again later.");
         }
     }
@@ -204,7 +204,7 @@ export const userSlice = createSlice({
 
         },
         [addBookmark.rejected]: (state, { payload }) => {
-            console.log(payload)
+
         },
 
         [removeBookmark.fulfilled]: (state, { payload: { bookmarks, message } }) => {

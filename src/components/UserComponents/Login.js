@@ -56,7 +56,7 @@ const Login = () => {
 				<form className="flex flex-col gap-8 ">
 					<div className="">
 						<label
-							for="email"
+							htmlFor="email"
 							className="block mb-2 text-sm font-medium text-gray-900 ">
 							Your email
 						</label>
@@ -72,7 +72,7 @@ const Login = () => {
 					</div>
 					<div className="relative">
 						<label
-							for="password"
+							htmlFor="password"
 							className="block mb-2 text-sm font-medium text-gray-900 ">
 							Your password
 						</label>

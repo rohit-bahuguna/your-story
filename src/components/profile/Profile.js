@@ -19,7 +19,7 @@ const Profile = () => {
 
 	}, [email])
 
-	console.log(currentUser)
+
 	return <Layout>
 
 		<div className="flex   justify-center items-center md:w-[82.80vw]   mt-5  mb-20  ">
