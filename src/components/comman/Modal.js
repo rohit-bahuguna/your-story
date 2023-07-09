@@ -5,9 +5,11 @@ import { userLogout } from '../../redux/features/authSlice';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { postReset } from '../../redux/features/postSlice';
 import { userReset } from '../../redux/features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
 	const { logoutModal } = useSelector(state => state.globalReducer);
 	const logoutRef = useRef(null);
 
@@ -65,6 +67,7 @@ const Modal = () => {
 							dispatch(postReset())
 							dispatch(userReset())
 							dispatch(toggleLogoutModal(false));
+							navigate('/')
 						}}>
 						Logout
 					</button>

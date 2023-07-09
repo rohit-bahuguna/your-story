@@ -8,8 +8,9 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import Layout from "../comman/Layout"
 import { isInBookmarks } from '../../utils/postInBookmarks';
 import { isLiked } from '../../utils';
+import Loader from "../comman/Loader"
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import { addComment, dislikePost, likePost } from '../../redux/features/postSlice';
+import { addComment, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
 import { addBookmark, removeBookmark } from '../../redux/features/userSlice';
 const PostDetails = () => {
 
@@ -17,15 +18,7 @@ const PostDetails = () => {
 	const dispatch = useDispatch();
 	const {
 		post: {
-			postDetails: { _id,
-				comments,
-				postImage,
-				content,
-				postBy: { fullName,
-
-					profileAvatar },
-				likes: { likeCount, likedBy }
-			}
+			postDetails, isLoading
 		},
 		auth: { user },
 		user: { bookmarks }
@@ -39,48 +32,53 @@ const PostDetails = () => {
 		profilePicture: user.profileAvatar
 	})
 
+
+
+
+	console.log(postDetails)
 	const [focus, setFocus] = useState(false)
 
 	const postIsInBookmark = isInBookmarks(bookmarks, postId)
-	const postLikedByUser = isLiked(likedBy, user.email)
+	const postLikedByUser = isLiked(postDetails?.likes?.likedBy, user.email)
 
 	const likeOrDislikePost = () => {
-		postLikedByUser ? dispatch(dislikePost({ token: user.token, _id })) : dispatch(likePost({ token: user.token, _id }))
+		postLikedByUser ? dispatch(dislikePost({ token: user.token, postId })) : dispatch(likePost({ token: user.token, postId }))
 	}
 
 	const bookmarkPost = () => {
-		postIsInBookmark ? dispatch(removeBookmark({ token: user.token, _id })) : dispatch(addBookmark({ token: user.token, _id }))
+		postIsInBookmark ? dispatch(removeBookmark({ token: user.token, postId })) : dispatch(addBookmark({ token: user.token, postId }))
 
 	}
+
 
 
 
 
 	return (
 		<Layout>
-			<div className="flex md:flex-row flex-col gap-5  border border-red-500  mb-[10vh] md:px-3 md:mt-3 h-screen md:mb-0 justify-center  w-screen  md:w-[83vw] overflow-y-scroll">
+			{!isLoading && <div className="flex md:flex-row flex-col gap-5  mb-[10vh] md:px-3 md:mt-3 h-screen md:mb-0 justify-center  w-screen  md:w-[83vw] overflow-y-scroll">
 				<div className='w-screen md:w-[45%] '>
 					<div className="flex border-b md:hidden px-2 justify-between  py-2">
 						<div className="flex gap-2">
-							<img src={profileAvatar} alt={fullName} className="h-12 aspect-square  rounded-full" />
+							<img src={postDetails?.postBy.profileAvatar} alt={postDetails?.postBy.fullName} className="h-12 aspect-square  rounded-full" />
 							<div>
 								<h1>
-									{fullName}
+									{postDetails?.postBy.fullName}
 								</h1>
 								<p className="text-gray-400 ">1h</p>
 							</div>
 						</div>
 						<FiMoreHorizontal className=" self-center text-2xl" />
 					</div>
-					<img src={postImage} alt="" className='' />
+					<img src={postDetails?.postImage} alt="" className='' />
 				</div>
 				<div className="md:w-1/2 w-screen  px-2 md:px-0 flex flex-col gap-5">
 					<div className="md:flex border-b hidden  justify-between  py-2">
 						<div className="flex gap-2">
-							<img src={profileAvatar} alt={fullName} className="h-12 aspect-square  rounded-full" />
+							<img src={postDetails?.postBy.profileAvatar} alt={postDetails?.postBy.fullName} className="h-12 aspect-square  rounded-full" />
 							<div>
 								<h1>
-									{fullName}
+									{postDetails?.postBy.fullName}
 								</h1>
 								<p className="text-gray-400 ">1h</p>
 							</div>
@@ -88,19 +86,19 @@ const PostDetails = () => {
 						<FiMoreHorizontal className=" self-center text-2xl" />
 					</div>
 					<div className="flex  gap-2">
-						<img src={profileAvatar} alt={fullName} className="h-12  rounded-full aspect-square" />
+						<img src={postDetails?.postBy.profileAvatar} alt={postDetails?.postBy.fullName} className="h-12  rounded-full aspect-square" />
 						<div>
 							<h1>
-								{fullName}
+								{postDetails?.postBy.fullName}
 							</h1>
 							<p className="text-gray-400 ">
-								{content}
+								{postDetails?.content}
 							</p>
 						</div>
 					</div>
 					<div className='flex flex-col  gap-5'>
-						{comments &&
-							comments.map(
+						{postDetails?.comments &&
+							postDetails?.comments.map(
 								({ _id, message, name, email, profilePicture, createdAt }) =>
 									<div key={_id} className='flex justify-between  pr-2'>
 										<div className='flex gap-3 relative'>
@@ -142,7 +140,7 @@ const PostDetails = () => {
 						</div>
 						<div>
 							<p>
-								{likeCount} {likeCount > 1 ? "likes" : "like"}
+								{postDetails?.likes.likeCount} {postDetails?.likes.likeCount > 1 ? "likes" : "like"}
 							</p>
 						</div>
 						<div className=" hidden md:flex  justify-between items-center px-3">
@@ -169,7 +167,12 @@ const PostDetails = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>}
+			{
+				isLoading && <div className='flex justify-center  w-screen px-5 md:w-[83vw] items-center'>
+					<Loader />
+				</div>
+			}
 		</Layout>
 	);
 };
