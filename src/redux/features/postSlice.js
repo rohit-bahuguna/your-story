@@ -287,13 +287,24 @@ extraReducers: {
 
     [likePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      if (state.postDetails.id) {
+        state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      }
       toast.success("Post Liked 👍")
+  }
+  ,
+  [likePost.rejected]: (state, { payload }) => {
+
   }
   ,
     [dislikePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      if (state.postDetails.id) {
+        state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      };
       toast.success("Post DisLiked 👎")
 
     },
@@ -303,19 +314,28 @@ extraReducers: {
 
     [addComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      if (state.postDetails.id) {
+        state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      }
       toast.success("New Comment Added")
 
     },
     [editComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      if (state.postDetails.id) {
+        state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      }
       toast.success("Comment Updated")
 
     },
     [deleteComment.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
-      state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+      if (state.postDetails.id) {
+        state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
+
+      }
       toast.success("Comment Deleted")
 
     },
