@@ -42,7 +42,7 @@ const CreatePost = ({ postId }) => {
 			setPostData(postDetails)
 		}
 	}, [isLoading])
-	console.log(postData)
+	console.log("postDetails", postDetails)
 	const [newPostImage, setNewPostImage] = useState()
 	const [deleteToken, setDeleteToken] = useState()
 	const getPostData = e => {
@@ -92,7 +92,7 @@ const CreatePost = ({ postId }) => {
 
 	return (
 		<Layout>
-			{!isLoading && <div className='flex w-screen justify-center md:w-[83vw] max-h-[90vh]   z-20  items-center '>
+			{!isLoading && postDetails && <div className='flex w-screen justify-center md:w-[83vw] max-h-[90vh]   z-20  items-center '>
 				<div className="flex flex-col  md:mt-0 mt-5  ">
 					<div className="flex flex-col   ">
 						{!postId && <div className="flex  w-screen md:w-full justify-between items-center px-5 py-1">

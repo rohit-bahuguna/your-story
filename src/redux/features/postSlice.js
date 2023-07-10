@@ -245,7 +245,7 @@ extraReducers: {
     },
     [getSinglePost.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload)
+
       state.postDetails = payload;
     },
     [getSinglePost.rejected]: (state) => {

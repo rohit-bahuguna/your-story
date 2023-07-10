@@ -18,7 +18,7 @@ const Explore = () => {
 		<Layout>
 			<div className='flex flex-col md:w-[83vw] gap-5 justify-center items-center'>
 				<SearchBar search={search} setSearch={setSearch} style={`w-[90vw] md:w-[50vw]`} />
-				<div className='grid grid-cols-3  gap-2 '>
+				<div className='grid grid-cols-3  gap-2 ' id="images-wrapper">
 					{
 						searchedPosts.map(post => <PostCard post={post} />)
 					}

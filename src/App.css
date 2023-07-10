@@ -41,3 +41,23 @@ body {
 .input {
 	@apply bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500
 }
+
+
+#images-wrapper {    
+   line-height: 0;       
+   
+     column-count: 3;    
+     column-gap: 0px;  
+	 column-gap: 10px;
+	 row-gap: 5px;  
+}  
+#images-wrapper img {    
+   width: 100% !important;    
+   height: auto !important; 
+   margin-bottom: 10px; 
+}  
+#images-wrapper{    
+   display:inline-block;    
+   margin-right: auto;    
+   margin-left: auto;  
+}

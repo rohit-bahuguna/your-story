@@ -513,7 +513,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688914589/your_story/post/r34ol3lokac3gbxo73gs.jpg',
 		postVideos: [],
-		createdAt: "2023-07-07T09:32:39+05:30",
+		createdAt: "2023-03-07T09:32:39+05:30",
 		updatedAt: formatDate(),
 		comments: [
 
@@ -532,7 +532,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688914589/your_story/post/mnqkfy0l6u7zm2hwdpbc.jpg',
 		postVideos: [],
-		createdAt: "2023-07-07T09:32:39+05:30",
+		createdAt: "2023-04-07T09:32:39+05:30",
 		updatedAt: formatDate(),
 		comments: [
 
@@ -551,7 +551,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688914589/your_story/post/p0kgmafhvuoi3hv3l6rb.jpg',
 		postVideos: [],
-		createdAt: "2023-07-07T09:32:39+05:30",
+		createdAt: "2023-05-07T09:32:39+05:30",
 		updatedAt: formatDate(),
 		comments: [
 
@@ -570,7 +570,7 @@ export const posts = [
 		},
 		postImage: 'https://res.cloudinary.com/dqblmzhhm/image/upload/v1688914589/your_story/post/ijv4jj6bulzon1z7wjzp.jpg',
 		postVideos: [],
-		createdAt: "2023-07-07T09:32:39+05:30",
+		createdAt: "2023-05-07T09:32:39+05:30",
 		updatedAt: formatDate(),
 		comments: [
 

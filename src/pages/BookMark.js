@@ -22,7 +22,7 @@ const BookMark = () => {
                 {
 
                     searchedPosts.length > 0 ?
-                        <div className='grid grid-cols-3  gap-2 '>
+                        <div className='grid grid-cols-3  gap-2 ' id="images-wrapper">
                             {searchedPosts.map(post => <PostCard post={post} />)}
 
                         </div> : <div className='text-center text-2xl'>

@@ -90,7 +90,9 @@ const PostCard = ({ post }) => {
 						{email !== user.email && <>
 							<p className='more ' onClick={bookmarkPost} >Add To Bookmark</p>
 						</>}
-						<Link to={`/post/${_id}`}>
+						<Link to={`/post/${_id}`}
+							onClick={() => dispatch(getSinglePost(_id))}
+						>
 							<p className='more'>Go To Post</p>
 						</Link>
 						<p className='more ' onClick={() => setShowMore(false)}>Cancel</p>
