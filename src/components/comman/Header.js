@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi"
 import { BiBookmark } from 'react-icons/bi';
@@ -10,6 +10,7 @@ import {
 } from 'react-icons/md';
 import { toggleDarkMode, toggleLogoutModal } from '../../redux/features/globalSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 
 const Header = () => {
@@ -17,8 +18,10 @@ const Header = () => {
 
 	const dispatch = useDispatch()
 	const [display, setDisplay] = useState(false)
+	const headRef = useRef(null)
+	useOutsideClick(headRef, () => setDisplay(false))
 	return (
-		<div className=" flex border-b w-full text-xl justify-between items-center p-3  md:hidden relative"  >
+		<div className=" flex border-b w-full text-xl justify-between items-center p-3  md:hidden relative"   >
 			<div >
 				<Link to="/posts">
 					<div className=" border-2 border-indigo-500 px-1 pt-2.5 text-center h-12  text-xl hover:bg-indigo-100  text-indigo-700   ">
@@ -33,7 +36,7 @@ const Header = () => {
 				<GiHamburgerMenu className='hover:text-sky-500 text-3xl' onClick={() => setDisplay(!display)} />
 			</div>
 
-			{display && <div className={`absolute right-5 top-10  z-20 border p-3 rounded-xl ${theme === "dark" ? "bg-black" : "bg-white"}`} >
+			{display && <div className={`absolute right-5 top-10  z-20 border p-3 rounded-xl ${theme === "dark" ? "bg-black" : "bg-white"}`} ref={headRef}>
 				<Link to="/bookmarks">
 					<p className='flex  items-center gap-3 border-b py-1 hover:bg-gray-200 px-2 hover:text-sky-500'
 
