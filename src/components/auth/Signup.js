@@ -107,7 +107,7 @@ const Signup = () => {
 
 						required
 					/>
-					{showPassword ? <LiaEyeSolid className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
+					{showPassword ? <LiaEyeSolid className='absolute top-9 mt-1 text-black right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700 text-black' onClick={() => setShowPassword(true)} />
 					}
 					{
 						errors.passwordError.status && <span className="text-red-500  ">
