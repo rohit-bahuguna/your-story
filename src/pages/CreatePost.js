@@ -139,8 +139,8 @@ const CreatePost = ({ postId }) => {
 
 							<div className="mt-3  flex flex-col gap-2  ">
 								<div className="flex gap-2">
-									<img src="/profile.png" alt="" className="w-8 rounded-full" />
-									<span className="font-semibold">the rohit bahuguna</span>
+									<img src={profileAvatar} alt={fullName} className="w-8 rounded-full" />
+									<span className="font-semibold">{fullName}</span>
 								</div>
 								<textarea
 									name=""
