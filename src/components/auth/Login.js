@@ -116,25 +116,25 @@ const Login = () => {
 					</div>
 
 					<div className="flex  gap-5 self-center items-center">
-						<button
-							className="botton"
-							onClick={userLogin}
-							disabled={isLoading}>
-							{isLoading
-								? <Spinner />
-								: 'Login'}
-						</button>
-						<span className="text-lg text-gray-500">or</span>
-						<button
-							className="botton"
-							onClick={guestLogin}
-							disabled={isLoading}
-						>
-							{loginGuest
-								? <Spinner />
-								: 'Login as Guest'}
+						{
+							isLoading ? <Spinner /> : <>
+								<button
+									className="botton"
+									onClick={userLogin}
+									disabled={isLoading}>
+									Login
+								</button>
+								<span className="text-lg text-gray-500">or</span>
+								<button
+									className="botton"
+									onClick={guestLogin}
+									disabled={isLoading}
+								>
+									Login as Guest
 
-						</button>
+								</button>
+							</>
+						}
 					</div>
 					<div className="">
 						<p>

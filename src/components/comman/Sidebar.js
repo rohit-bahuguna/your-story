@@ -28,7 +28,7 @@ const Sidebar = ({ direction }) => {
 	const activeNavlink = ({ isActive }) => isActive && "text-indigo-700 md:bg-indigo-100 rounded-full"
 	return (
 		<div
-			className={`md:border-r-2 lg:w-full  w-full md:w-20 text-center   overflow-hidden    `}>
+			className={`md:border-r-2 lg:w-full  w-full md:w-20 text-center   overflow-hidden  ${theme === "dark" ? "bg-black" : "bg-white"}  `}>
 			<div
 				className={`md:p-3  md:h-5/6  h-14   px-2  md:py-0 mb-2 flex flex-${direction} justify-between items-center   md:gap-4 md:mt-5`}>
 				<Logo />

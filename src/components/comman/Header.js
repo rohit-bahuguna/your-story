@@ -8,10 +8,13 @@ import {
 	MdDarkMode,
 	MdLogout
 } from 'react-icons/md';
-import { toggleLogoutModal } from '../../redux/features/globalSlice';
-import { useDispatch } from 'react-redux';
-import Logo from './Logo';
+import { toggleDarkMode, toggleLogoutModal } from '../../redux/features/globalSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 const Header = () => {
+	const { globalReducer: { theme } } = useSelector(state => state)
+
 	const dispatch = useDispatch()
 	const [display, setDisplay] = useState(false)
 	return (
@@ -30,13 +33,15 @@ const Header = () => {
 				<GiHamburgerMenu className='hover:text-sky-500 text-3xl' onClick={() => setDisplay(!display)} />
 			</div>
 
-			{display && <div className='absolute right-5 top-10 bg-white z-20 border p-3 rounded-xl' >
+			{display && <div className={`absolute right-5 top-10  z-20 border p-3 rounded-xl ${theme === "dark" ? "bg-black" : "bg-white"}`} >
 				<Link to="/bookmarks">
 					<p className='flex  items-center gap-3 border-b py-1 hover:bg-gray-200 px-2 hover:text-sky-500'
 
 					> <BiBookmark className='text-xl' /> BookMark</p>
 				</Link>
-				<p className='flex  items-center gap-3 border-b py-1 hover:bg-gray-200 px-2 hover:text-sky-500'> <MdDarkMode className='text-xl' />  Switch Mode</p>
+				<p className='flex  items-center gap-3 border-b py-1 hover:bg-gray-200 px-2 hover:text-sky-500' onClick={() => dispatch(toggleDarkMode())}> {
+					theme === "dark" ? <MdLightMode className='text-xl' /> : <MdDarkMode className='text-xl' />
+				} Switch Mode</p>
 				<p className='flex  items-center gap-3 border-b py-1 hover:bg-gray-200 px-2 hover:text-sky-500' onClick={() => {
 					dispatch(toggleLogoutModal(true))
 					setDisplay(false)

@@ -180,9 +180,9 @@ const PostDetails = () => {
 								{postDetails?.likes.likeCount} {postDetails?.likes.likeCount > 1 ? "likes" : "like"}
 							</p>
 						</div>
-						<div className=" hidden md:flex  justify-between items-center px-3">
+						<div className="  flex  justify-between items-center px-3">
 							<div>
-								<HiOutlineEmojiHappy className="text-2xl inline mr-3" />
+								{/* <HiOutlineEmojiHappy className="text-2xl inline mr-3" /> */}
 								<input
 									type="text"
 									placeholder="Add a comment"
