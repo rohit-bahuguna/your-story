@@ -43,7 +43,7 @@ const CreatePost = ({ postId }) => {
 			setPostData(postDetails)
 		}
 	}, [isLoading])
-	console.log("postDetails", postDetails)
+
 	const [newPostImage, setNewPostImage] = useState()
 	const [deleteToken, setDeleteToken] = useState()
 	const getPostData = e => {
@@ -161,11 +161,11 @@ const CreatePost = ({ postId }) => {
 										className="text-2xl"
 										onClick={() => setToggleEmoji(!toggleEmaoji)}
 									/>
-									<span className="text-lg text-gray-400">
+									{/* <span className="text-lg text-gray-400">
 										{postData?.content.length > 0
 											? postData?.content.trim().split(' ').length
 											: 0}
-									</span>
+									</span> */}
 								</div>
 								<EmojiPicker onEmojiClick={getPostData} toggle={toggleEmaoji} setToggleEmoji={setToggleEmoji} />
 							</div>

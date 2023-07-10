@@ -106,7 +106,7 @@ export const likePost = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -124,7 +124,7 @@ export const dislikePost = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -140,7 +140,7 @@ export const addComment = createAsyncThunk(
         return data.posts;
       }
     } catch (error) {
-      console.log(error)
+
       return rejectWithValue([], "Error occured. Try again later.");
     }
   }
@@ -274,7 +274,6 @@ extraReducers: {
   },
     [editPost.rejected]: (state, { payload }) => {
       state.error = payload;
-      console.log(payload)
       toast.error(payload);
 
     },
@@ -290,12 +289,8 @@ extraReducers: {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
       toast.success("Post Liked 👍")
-    },
-    [likePost.rejected]: (state, { payload }) => {
-      console.log(payload)
-
-    },
-
+  }
+  ,
     [dislikePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
