@@ -3,7 +3,7 @@ import { loginHandler } from '../../redux/features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { LiaEyeSlash, LiaEyeSolid } from "react-icons/lia"
 import { Link } from 'react-router-dom';
-import Spinner from '../comman/Spinner';
+import Loader from '../comman/Loader';
 import { initialErrors, validateUserData } from '../../utils';
 
 
@@ -117,7 +117,10 @@ const Login = () => {
 
 					<div className="flex  gap-5 self-center items-center">
 						{
-							isLoading ? <Spinner /> : <>
+							isLoading ? <div className='w-16'>
+
+								<Loader />
+							</div> : <>
 								<button
 									className="botton"
 									onClick={userLogin}
