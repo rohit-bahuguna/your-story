@@ -4,6 +4,7 @@ const initialState = {
 	openModal: false,
 	logoutModal: false,
 	searchModal: false,
+	theme: localStorage.getItem('theme') || "light"
 };
 
 export const globalSlice = createSlice({
@@ -18,10 +19,17 @@ export const globalSlice = createSlice({
 		},
 		toggleSearchModal: (state, { payload }) => {
 			state.searchModal = payload
+		},
+		toggleDarkMode: (state) => {
+
+
+			state.theme = state.theme === "light" ? "dark" : "light"
+			localStorage.setItem('theme', state.theme)
+
 		}
 	}
 });
 
-export const { toggleModal, toggleLogoutModal, toggleSearchModal } = globalSlice.actions;
+export const { toggleModal, toggleLogoutModal, toggleSearchModal, toggleDarkMode } = globalSlice.actions;
 
 export default globalSlice.reducer;

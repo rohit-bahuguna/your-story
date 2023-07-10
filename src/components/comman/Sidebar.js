@@ -13,6 +13,7 @@ import { FiPlusCircle } from 'react-icons/fi';
 import Logo from './Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	toggleDarkMode,
 	toggleLogoutModal,
 	toggleModal,
 	toggleSearchModal
@@ -23,13 +24,13 @@ import { getCurrentUser } from '../../redux/features/userSlice';
 
 const Sidebar = ({ direction }) => {
 	const dispatch = useDispatch();
-	const { globalReducer: { searchModal }, auth: { user } } = useSelector(state => state);
+	const { globalReducer: { theme }, auth: { user } } = useSelector(state => state);
 	const activeNavlink = ({ isActive }) => isActive && "text-indigo-700 md:bg-indigo-100 rounded-full"
 	return (
 		<div
 			className={`md:border-r-2 lg:w-full  w-full md:w-20 text-center   overflow-hidden    `}>
 			<div
-				className={`md:p-3  md:h-5/6  h-14   px-2  md:py-0 mb-2 flex flex-${direction} justify-between items-center  bg-white md:gap-4 md:mt-5`}>
+				className={`md:p-3  md:h-5/6  h-14   px-2  md:py-0 mb-2 flex flex-${direction} justify-between items-center   md:gap-4 md:mt-5`}>
 				<Logo />
 				<NavLink className={activeNavlink} to="/posts" >
 					<div className="  navlink-1 ">
@@ -100,11 +101,18 @@ const Sidebar = ({ direction }) => {
 					</div>
 				</NavLink>
 
-				<div className=" navlink-2 ">
+				<div className=" navlink-2 "
+					onClick={() => dispatch(toggleDarkMode())}
+				>
 					<span>
-						<MdDarkMode className="icon" />
+
+						{
+							theme === "light" ? <MdDarkMode className="icon" /> : <MdLightMode className="icon" />
+						}
 					</span>
-					<span className="w-26 text-lg  mt-1 hidden  lg:inline h-10  ">
+					<span className="w-26 text-lg  mt-1 hidden  lg:inline h-10  "
+
+					>
 						Switch Mode
 					</span>
 				</div>

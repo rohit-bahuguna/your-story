@@ -1,15 +1,18 @@
 import React, { useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
+import { useSelector } from 'react-redux'
 
 const Avatar = ({ closeModal, getProfilePicture, updateProfile, }) => {
+    const { globalReducer: { theme } } = useSelector(state => state)
+
     const avatars = ['https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868964/avatar/avatar_12_u8mwqn.png', "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868867/avatar/avatar_1_cd5izv.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868867/avatar/avatar_2_pwnw7r.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868867/avatar/avatar_3_vlj9bj.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868866/avatar/avatar_4_dypoop.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868866/avatar/avatar_7_u0ovwn.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868866/avatar/avatar_5_qhaarj.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868866/avatar/avatar_8_klj3pz.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868865/avatar/avatar_9_vaa7qy.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868866/avatar/avatar_6_sonrdg.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868865/avatar/avatar_11_cxqlmq.png", "https://res.cloudinary.com/dqblmzhhm/image/upload/v1687868865/avatar/avatar_10_bnw5yv.png"]
     const profileRef = useRef(null)
     useOutsideClick(profileRef, () => closeModal())
 
     const [active, setActive] = useState()
     return (
-        <div className='md:border border-t  border-black shadow  rounded-xl' ref={profileRef}>
+        <div className={`md:border border-t ${theme === "dark" ? "bg-black " : "bg-white"} border-black shadow  rounded-xl `} ref={profileRef}>
             <div className='border-b-2 flex justify-end gap-5 py-2 px-2'>
                 <button className='text-2xl px-3 hover:bg-red-100 rounded-full text-red-500 bordr   ' onClick={() => {
                     closeModal()

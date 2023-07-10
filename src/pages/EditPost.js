@@ -1,8 +1,8 @@
 
 import React from 'react'
 
-import CreatePost from '../CreatePost';
-import Layout from '../comman/Layout';
+import CreatePost from './CreatePost';
+import Layout from '../components/comman/Layout';
 import { useParams } from 'react-router-dom';
 
 const EditPost = () => {

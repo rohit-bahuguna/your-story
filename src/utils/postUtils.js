@@ -30,3 +30,16 @@ export const getTimeAgo = (date) => {
         return Math.floor(timeDiff / year) + ' years ago';
     }
 }
+
+export const isInBookmarks = (bookmarks, postId) => bookmarks.find(post => post._id === postId);
+
+
+export const searchPost = (posts, search) => {
+
+    if (search !== "") {
+        return posts.filter(({ postBy: { fullName, email } }) => fullName.toLowerCase().includes(search) || email.toLowerCase().includes(search))
+    } else {
+        return posts
+    }
+
+}

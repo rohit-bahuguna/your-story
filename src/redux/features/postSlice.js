@@ -184,7 +184,7 @@ const sortPostByDate = (posts) => {
   return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 }
 
-const findCurrentUsersPOsts = (posts, email) => {
+const findCurrentUsersPost = (posts, email) => {
   return posts.filter(post => post.postBy.email === email)
 }
 
@@ -213,7 +213,7 @@ export const postSlice = createSlice({
       state.posts = sortPostByTranding(state.posts)
     },
     getCurrentUsersPosts: (state, { payload }) => {
-      state.currentUsersPosts = findCurrentUsersPOsts(state.posts, payload)
+      state.currentUsersPosts = findCurrentUsersPost(state.posts, payload)
     },
     postReset: (state) => {
       state.posts = [];
@@ -281,17 +281,15 @@ extraReducers: {
 
     [deletePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
+
       toast.success("Post Deleted")
     },
-  [deletePost.rejected]: (state, { payload }) => {
-    console.log(payload)
-    // state.error = payload;
-    },
+
 
     [likePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
-      toast.success("👍")
+      toast.success("Post Liked 👍")
     },
     [likePost.rejected]: (state, { payload }) => {
       console.log(payload)
@@ -301,7 +299,7 @@ extraReducers: {
     [dislikePost.fulfilled]: (state, { payload }) => {
       state.posts = sortPostByDate(payload);
       state.postDetails = updatePostDetails(state.posts, state.postDetails.id)
-      toast.success("👎")
+      toast.success("Post DisLiked 👎")
 
     },
     [dislikePost.rejected]: (state, { payload }) => {

@@ -3,12 +3,12 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from '../redux/features/globalSlice';
-import EmojiPicker from './comman/EmojiPicker';
+import EmojiPicker from '../components/comman/EmojiPicker';
 import { useNavigate } from 'react-router-dom';
 import { createPost, editPost } from '../redux/features/postSlice';
 import { useMedia } from '../hooks/useMedia';
-import Layout from './comman/Layout';
-import Loader from './comman/Loader';
+import Layout from '../components/comman/Layout';
+import Loader from '../components/comman/Loader';
 
 const CreatePost = ({ postId }) => {
 	const dispatch = useDispatch();
@@ -17,7 +17,8 @@ const CreatePost = ({ postId }) => {
 		post: {
 			postDetails, isLoading
 		},
-		auth: { user: { token, fullName, email, username, profileAvatar } }
+		auth: { user: { token, fullName, email, username, profileAvatar } },
+		globalReducer: { theme }
 	} = useSelector(state => state);
 	const { uploadMedia, deleteMedia } = useMedia();
 
@@ -152,7 +153,7 @@ const CreatePost = ({ postId }) => {
 										setPostData({ ...postData, content: e.target.value });
 									}}
 									value={postData?.content}
-									className=" resize-none focus:outline-none"
+									className={`resize-none focus:outline-none ${theme === "dark" ? "bg-black" : "bg-white"}`}
 								/>
 
 								<div className="flex justify-between px-3 ">

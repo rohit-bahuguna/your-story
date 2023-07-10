@@ -4,29 +4,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LiaEyeSlash, LiaEyeSolid } from "react-icons/lia"
 import { Link } from 'react-router-dom';
 import Spinner from '../comman/Spinner';
+import { initialErrors, validateUserData } from '../../utils';
 
 
 const Login = () => {
 	const dispatch = useDispatch();
-
+	const [loginGuest, setGuestLogin] = useState(false)
 	const { isLoading } = useSelector(state => state.auth);
 	const [authData, setAuthData] = useState({
 		email: '',
 		password: ''
 	});
+	const [errors, setErrors] = useState(initialErrors)
+
 	const [showPassword, setShowPassword] = useState(false)
 	const getUserAuthData = e => {
+		setErrors(initialErrors)
+
 		setAuthData({ ...authData, [e.target.name]: e.target.value });
 	};
 
 	const userLogin = (e) => {
 		e.preventDefault()
-		dispatch(loginHandler(authData))
+		const { success, newErrors } = validateUserData(authData, false)
 
+		if (success) {
+			dispatch(loginHandler(authData))
+		} else {
+			setErrors({ ...errors, ...newErrors })
+		}
 	};
 
 	const guestLogin = (e) => {
 		e.preventDefault()
+
+		setErrors(initialErrors)
 		setAuthData({
 			password: 'guestuser',
 			email: "guestuser@gmail.com",
@@ -36,6 +48,8 @@ const Login = () => {
 			password: 'guestuser',
 			email: "guestuser@gmail.com",
 		}))
+
+		setGuestLogin(false)
 	}
 
 
@@ -69,6 +83,11 @@ const Login = () => {
 							placeholder="Enter Your Email"
 							required
 						/>
+						{
+							errors.emailError.status && <span className="text-red-500  ">
+								{errors.emailError.error}
+							</span>
+						}
 					</div>
 					<div className="relative">
 						<label
@@ -86,8 +105,14 @@ const Login = () => {
 							required
 
 						/>
-						{showPassword ? <LiaEyeSolid className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
+						{showPassword ? <LiaEyeSolid className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
 						}
+						{
+							errors.passwordError.status && <span className="text-red-500  ">
+								{errors.passwordError.error}
+							</span>
+						}
+
 					</div>
 
 					<div className="flex  gap-5 self-center items-center">
@@ -105,7 +130,7 @@ const Login = () => {
 							onClick={guestLogin}
 							disabled={isLoading}
 						>
-							{isLoading
+							{loginGuest
 								? <Spinner />
 								: 'Login as Guest'}
 

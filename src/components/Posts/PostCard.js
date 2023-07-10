@@ -1,29 +1,27 @@
 import React, { useRef, useState } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { BiComment, BiBookmark } from 'react-icons/bi';
+import { BiComment } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md';
-import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment, deletePost, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
 import { addBookmark, removeBookmark } from '../../redux/features/userSlice';
-import { isInBookmarks } from '../../utils/postInBookmarks';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import { AiOutlineHeart } from 'react-icons/ai';
 import { useOutsideClick } from "../../hooks/useOutsideClick"
-import { getTimeAgo, isLiked } from '../../utils';
+import { getTimeAgo, isLiked, isInBookmarks } from '../../utils';
+
 const PostCard = ({ post }) => {
 	const {
 		_id,
 
-		postBy: { username, fullName, profileAvatar, email },
+		postBy: { fullName, profileAvatar, email },
 		postImage,
 		content,
 		likes: { likeCount, likedBy },
 		comments,
 		createdAt
 	} = post;
-	const { auth: { user }, user: { bookmarks } } = useSelector(state => state)
+	const { auth: { user }, user: { bookmarks }, globalReducer: { theme } } = useSelector(state => state)
 
 	const [commentData, setCommentData] = useState({
 		message: '',
@@ -77,7 +75,7 @@ const PostCard = ({ post }) => {
 				</div>
 				<FiMoreHorizontal className=" self-center text-2xl hover:cursor-pointer hover:text-indigo-700" onClick={() => setShowMore(!showMore)} />
 				{
-					showMore && <div className=' flex flex-col gap-3  border absolute top-10  right-0 bg-white z-10 py-3  rounded-xl shadow-lg min-w-[12vw]' ref={postRef}>
+					showMore && <div className={`flex flex-col gap-3  border absolute top-10  right-0  z-10 py-3 ${theme === "dark" ? "bg-black" : "bg-white"}  rounded-xl shadow-lg min-w-[12vw]`} ref={postRef}>
 						{email === user.email && <>
 							<p className='more text-red-500' onClick={(() => dispatch(deletePost({ _id, token: user.token })))}>Delete</p>
 
@@ -113,7 +111,7 @@ const PostCard = ({ post }) => {
 				</Link>
 
 
-				<BsFillBookmarkFill className={`text-[1.8rem] hover:cursor-pointer  ${postIsInBookmark ? "text-black" : "text-gray-400"}`} onClick={bookmarkPost} />
+				<BsFillBookmarkFill className={`text-[1.8rem] hover:cursor-pointer  ${postIsInBookmark ? "text-gray-700" : "text-gray-300"}`} onClick={bookmarkPost} />
 			</div>
 			<div>
 				<p>
@@ -143,7 +141,7 @@ const PostCard = ({ post }) => {
 					<input
 						type="text"
 						placeholder="Add a comment"
-						className="bg-white  focus:outline-none focus:ring-0"
+						className={`focus:outline-none focus:ring-0 ${theme === "dark" ? "bg-black" : "bg-white"} `}
 						onChange={(e) => setCommentData({ ...commentData, message: e.target.value })}
 						value={commentData.message}
 					/>

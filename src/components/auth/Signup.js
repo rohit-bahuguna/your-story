@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LiaEyeSlash, LiaEyeSolid } from 'react-icons/lia';
 import Spinner from '../comman/Spinner';
+import { initialErrors, validateUserData } from '../../utils';
 
 const Signup = () => {
 	const dispatch = useDispatch();
@@ -15,15 +16,20 @@ const Signup = () => {
 		password: '',
 		name: ""
 	});
+
+	const [errors, setErrors] = useState(initialErrors)
 	const getUserAuthData = e => {
+		setErrors(initialErrors)
 		setAuthData({ ...authData, [e.target.name]: e.target.value });
 	};
 
 	const userSignup = e => {
 		e.preventDefault();
-
-		if (authData.email && authData.password && authData.name) {
+		const { success, newErrors } = validateUserData(authData, true)
+		if (success) {
 			dispatch(signUpHandler(authData));
+		} else {
+			setErrors({ ...errors, ...newErrors })
 		}
 	};
 
@@ -57,6 +63,11 @@ const Signup = () => {
 						placeholder="Enter Your Full Name"
 						required
 					/>
+					{
+						errors.nameError.status && <span className="text-red-500  ">
+							{errors.nameError.error}
+						</span>
+					}
 				</div>
 				<div className="">
 					<label
@@ -73,6 +84,11 @@ const Signup = () => {
 						placeholder="Enter Your Email"
 						required
 					/>
+					{
+						errors.emailError.status && <span className="text-red-500  ">
+							{errors.emailError.error}
+						</span>
+					}
 				</div>
 				<div className="relative">
 					<label
@@ -91,7 +107,12 @@ const Signup = () => {
 
 						required
 					/>
-					{showPassword ? <LiaEyeSolid className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-1/2 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
+					{showPassword ? <LiaEyeSolid className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(false)} /> : <LiaEyeSlash className='absolute top-9 mt-1 right-5 text-xl hover:cursor-pointer hover:text-indigo-700' onClick={() => setShowPassword(true)} />
+					}
+					{
+						errors.passwordError.status && <span className="text-red-500  ">
+							{errors.passwordError.error}
+						</span>
 					}
 				</div>
 

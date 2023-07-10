@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Layout from './comman/Layout';
+import Layout from '../components/comman/Layout';
 import { useSelector } from 'react-redux';
-import PostCard from './comman/PostCard';
+import PostCard from '../components/comman/PostCard';
 import { FaSearch } from 'react-icons/fa';
 import { RiDeleteBack2Line } from 'react-icons/ri';
-import { searchPost } from '../utils/searchpost';
-import SearchBar from './comman/SearchBar';
+import { searchPost } from '../utils';
+import SearchBar from '../components/comman/SearchBar';
 
 const Explore = () => {
 	const {
@@ -16,7 +16,7 @@ const Explore = () => {
 	const searchedPosts = searchPost(posts, search)
 	return (
 		<Layout>
-			<div className='flex flex-col md:w-[83vw] gap-5 justify-center items-center'>
+			<div className='flex flex-col md:w-[83vw] gap-5 px-10 justify-center items-center'>
 				<SearchBar search={search} setSearch={setSearch} style={`w-[90vw] md:w-[50vw]`} />
 				<div className='grid grid-cols-3  gap-2 ' id="images-wrapper">
 					{

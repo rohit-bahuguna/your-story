@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const Modal = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate()
-	const { logoutModal } = useSelector(state => state.globalReducer);
+	const { logoutModal, theme } = useSelector(state => state.globalReducer);
 	const logoutRef = useRef(null);
 
 	useOutsideClick(logoutRef, () => dispatch(toggleLogoutModal(false)));
@@ -20,7 +20,7 @@ const Modal = () => {
 				? ''
 				: 'hidden'}`} ref={logoutRef}>
 			<div
-				className={`sticky  inset-1/3 border rounded-xl bg-white z-50  p-4 h-[30vh] md:w-[30vw]`}>
+				className={`sticky  inset-1/3 border rounded-xl ${theme === "dark" ? "bg-black" : "bg-white"}  z-50  p-4 h-[30vh] md:w-[30vw]`}>
 				<button
 					type="button"
 					className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-red-500 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -74,7 +74,7 @@ const Modal = () => {
 					<button
 						data-modal-hide="popup-modal"
 						type="button"
-						className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+						className="text-gray-500 d hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
 						onClick={() => dispatch(toggleLogoutModal(false))}>
 						No, cancel
 					</button>

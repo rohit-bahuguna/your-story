@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import Layout from '../components/comman/Layout'
 import { useSelector } from 'react-redux';
-import { searchPost } from '../utils/searchpost';
-import { FaSearch } from 'react-icons/fa';
-import { RiDeleteBack2Line } from 'react-icons/ri';
+import { searchPost } from '../utils';
 import PostCard from '../components/comman/PostCard';
 import SearchBar from '../components/comman/SearchBar';
-import { postInBookmarks } from '../utils/postInBookmarks';
 
 const BookMark = () => {
     const {
@@ -17,7 +14,7 @@ const BookMark = () => {
     const searchedPosts = searchPost(bookmarks, search)
     return (
         <Layout>
-            <div className='flex flex-col md:w-[83vw] gap-5 justify-center items-center'>
+            <div className='flex flex-col px-10 md:w-[83vw] gap-5 justify-center items-center'>
                 <SearchBar search={search} setSearch={setSearch} style={`w-[90vw] md:w-[50vw]`} />
                 {
 

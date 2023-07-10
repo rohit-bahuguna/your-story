@@ -10,7 +10,6 @@ import {
     updateProfileService,
 } from "../../services/userServices";
 
-import { getSearchedUser } from "../../utils/getSearchedUser";
 import { toast } from 'react-hot-toast';
 
 export const getAllUsers = createAsyncThunk(

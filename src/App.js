@@ -1,23 +1,16 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/UserComponents/Login';
-import Signup from './components/UserComponents/Signup';
-import Explore from './components/Explore';
-import Search from './components/Search';
-import PostDetails from './components/Posts/PostDetails';
-import Home from './components/Home';
-import Profile from "./components/profile/Profile"
-import PageNotFound from './components/comman/PageNotFound';
-import { BookMark } from './pages';
-import EditPost from './components/Posts/EditPost';
-import CreatePost from './components/CreatePost';
+import { BookMark, CreatePost, EditPost, Explore, Home, PostDetails, Profile, PageNotFound, Login, Signup } from './pages';
 import PrivateRoute, { IsAuthenticated } from './components/comman/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import Search from './pages/Search';
 
 
 function App() {
+	const { theme } = useSelector(state => state.globalReducer)
 	return (
-		<>
+		<div className={theme === 'dark' && "bg-black text-white"}>
 			<Toaster
 				position="top-center"
 				reverseOrder={false}
@@ -43,7 +36,7 @@ function App() {
 					<Route path="/post/edit/:postId" element={<EditPost />} />
 				</Route>
 			</Routes>
-		</>
+		</div>
 	);
 }
 

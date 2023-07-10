@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileCard from "./ProfileCard"
-import Layout from '../comman/Layout';
+import ProfileCard from "../components/profile/ProfileCard"
+import Layout from '../components/comman/Layout';
 import { useParams } from 'react-router-dom';
-import { getCurrentUser, setCurrentProfilePic } from '../../redux/features/userSlice';
-import { getCurrentUsersPosts } from '../../redux/features/postSlice';
-import PostGrid from './PostGrid';
+import { getCurrentUser, setCurrentProfilePic } from '../redux/features/userSlice';
+import { getCurrentUsersPosts } from '../redux/features/postSlice';
+import PostGrid from '../components/Posts/PostGrid';
 
 
 const Profile = () => {
 	const { email } = useParams()
 	const dispatch = useDispatch()
-	const { auth, user: { currentUser }  } = useSelector(state => state);
+	const { auth, user: { currentUser }, post: { posts } } = useSelector(state => state);
 
 	useEffect(() => {
 
 		dispatch(getCurrentUsersPosts(email))
 
-	}, [email])
+	}, [email, posts])
 
 
 	return <Layout>

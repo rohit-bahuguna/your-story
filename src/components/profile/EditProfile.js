@@ -3,11 +3,14 @@ import ToolTip from '../comman/ToolTip'
 import { BiCamera } from 'react-icons/bi'
 import { updateProfile } from '../../redux/features/userSlice'
 import { updateAuthProfile } from '../../redux/features/authSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const EditProfile = ({ data: { user, currentProfilePic, setCurrentProfilePic, display, setDisplay, auth } }) => {
-    const { fullName, email, bio, website } = auth.user
+
+    const { email } = auth.user
+    const { globalReducer: { theme } } = useSelector(state => state)
     const [userData, setUserData] = useState(auth.user)
+
     const dispatch = useDispatch()
     const updateUserProfile = () => {
         dispatch(updateProfile({ ...auth.user, profileAvatar: currentProfilePic }))
@@ -23,7 +26,8 @@ const EditProfile = ({ data: { user, currentProfilePic, setCurrentProfilePic, di
     }, [currentProfilePic])
 
     return (
-        <div className='flex md:flex-row flex-col  bg-white md:gap-5 h-[85vh] md:h-[36vh] md:justify-between md:w-[48vw] rounded-xl   shadow-lg px-3'>
+        <div className={`flex md:flex-row flex-col border  md:gap-5 h-[85vh] md:h-auto md:justify-between md:w-[48vw] rounded-xl   shadow-lg px-3  ${theme === "dark" ? "bg-black " : "bg-white"}`}>
+
             <div className='relative    self-center ' onMouseOver={() => setDisplay({ ...display, upload: true })}
                 onMouseLeave={() => setDisplay({ ...display, upload: false })}
             >
@@ -39,11 +43,11 @@ const EditProfile = ({ data: { user, currentProfilePic, setCurrentProfilePic, di
             <div className='flex flex-col  gap-3 py-3 w-full items-center '>
                 <label htmlFor="bio">
                     <span className='text-lg'> Bio</span>
-                    <textarea name="" id="bio" cols="40" rows="3" value={userData.bio} className='border border-black w-full p-2 ' onChange={(e) => setUserData({ ...userData, bio: e.target.value })}></textarea>
+                    <textarea name="" id="bio" cols="40" rows="3" value={userData.bio} className='border border-black text-black w-full p-2 ' onChange={(e) => setUserData({ ...userData, bio: e.target.value })}></textarea>
                 </label>
                 <label htmlFor="website">
                     <span className='text-lg'>Website</span>
-                    <input type="text" className='border border-black md:w-[28vw] w-full py-1 px-2' value={userData.website} onChange={(e) => setUserData({ ...userData, website: e.target.value })} />
+                    <input type="text" className='border border-black md:w-[28vw] text-black w-full py-1 px-2' value={userData.website} onChange={(e) => setUserData({ ...userData, website: e.target.value })} />
                 </label>
                 <div className='flex gap-10'>
                     <button className='text-indigo-700 border-2  hover:bg-indigo-100 px-4 py-1 text-xl rounded-full'

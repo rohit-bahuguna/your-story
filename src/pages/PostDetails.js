@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiBookmark, BiComment, BiLayout } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import Layout from "../comman/Layout"
-import { isInBookmarks } from '../../utils/postInBookmarks';
-import { getTimeAgo, isLiked } from '../../utils';
-import Loader from "../comman/Loader"
+import Layout from "../components/comman/Layout"
+import { isInBookmarks } from '../utils';
+import { getTimeAgo, isLiked } from '../utils';
+import Loader from "../components/comman/Loader"
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import { addComment, dislikePost, getSinglePost, likePost } from '../../redux/features/postSlice';
-import { addBookmark, removeBookmark } from '../../redux/features/userSlice';
+import { addComment, deletePost, dislikePost, getSinglePost, likePost } from '../redux/features/postSlice';
+import { addBookmark, removeBookmark } from '../redux/features/userSlice';
+import { Link } from 'react-router-dom';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 const PostDetails = () => {
-
+	const navigate = useNavigate()
 	const { postId } = useParams();
 	const dispatch = useDispatch();
 	const {
@@ -21,9 +23,11 @@ const PostDetails = () => {
 			postDetails, isLoading
 		},
 		auth: { user },
-		user: { bookmarks }
-
+		user: { bookmarks },
+		globalReducer: { theme }
 	} = useSelector(state => state);
+
+	const [showMore, setShowMore] = useState(false)
 
 	const [commentData, setCommentData] = useState({
 		message: '',
@@ -48,6 +52,9 @@ const PostDetails = () => {
 		postIsInBookmark ? dispatch(removeBookmark({ token: user.token, _id: postId })) : dispatch(addBookmark({ token: user.token, _id: postId }))
 
 	}
+
+	const postRef = useRef(null);
+	useOutsideClick(postRef, () => setShowMore(false))
 
 	useEffect(() => {
 		dispatch(getSinglePost(postId))
@@ -79,7 +86,7 @@ const PostDetails = () => {
 					<img src={postDetails?.postImage} alt="" className='' />
 				</div>
 				<div className="md:w-1/2 w-screen  px-2 md:px-0 flex flex-col gap-5">
-					<div className="md:flex border-b hidden  justify-between  py-2">
+					<div className="md:flex border-b hidden  relative justify-between  py-2">
 						<div className="flex gap-2">
 							<img src={postDetails?.postBy.profileAvatar} alt={postDetails?.postBy.fullName} className="h-12 aspect-square  rounded-full" />
 							<div>
@@ -94,7 +101,24 @@ const PostDetails = () => {
 								</p>
 							</div>
 						</div>
-						<FiMoreHorizontal className=" self-center text-2xl" />
+						{postDetails.postBy.email === user.email && <FiMoreHorizontal className=" self-center text-2xl" onClick={() => setShowMore(true)} />}
+						{
+							showMore && <div className={`flex flex-col gap-3  border absolute top-10  right-0  z-10 py-3 ${theme === "dark" ? "bg-black" : "bg-white"}  rounded-xl shadow-lg min-w-[12vw]`} ref={postRef}>
+
+								<p className='more text-red-500' onClick={() => {
+									dispatch(deletePost({ _id: postId, token: user.token }))
+									navigate(-1)
+								}}>Delete</p>
+
+								<Link to={`/post/edit/${postId}`}>
+									<p className='more px-12'
+										onClick={() => dispatch(getSinglePost(postId))}
+									>Edit</p>
+								</Link>
+
+
+							</div>
+						}
 					</div>
 					<div className="flex  gap-2">
 						<img src={postDetails?.postBy.profileAvatar} alt={postDetails?.postBy.fullName} className="h-12  rounded-full aspect-square" />
@@ -127,8 +151,8 @@ const PostDetails = () => {
 														getTimeAgo(createdAt)
 													}</span>
 													<span>7 likes</span>
-													{email === user.email &&
-														<FiMoreHorizontal class />}
+													{/* {email === user.email &&
+														<FiMoreHorizontal class />} */}
 												</div>
 											</div>
 
@@ -138,18 +162,18 @@ const PostDetails = () => {
 												<p>Cancel</p>
 											</div> */}
 										</div>
-										<MdFavorite className='text-xl' />
+										{/* <MdFavorite className='text-xl' /> */}
 									</div>
 							)}
 					</div>
-					<div className=' flex flex-col gap-5  md:sticky bottom-0 py-2  left-1/2 right-0 bg-white '>
+					<div className=' flex flex-col gap-5  md:sticky bottom-0 py-2  left-1/2 right-0  '>
 						<div className="flex  gap-8 px-2">
 							<MdFavorite className={`text-[1.8rem]  hover:cursor-pointer ${postLikedByUser ? "text-red-500" : "text-gray-400"}`}
 								onClick={likeOrDislikePost}
 							/>
 							<BiComment className="text-[1.8rem]  hover:cursor-pointer " onClick={() => setFocus(true)} />
 
-							<BsFillBookmarkFill className={`text-[1.8rem]  hover:cursor-pointer ${postIsInBookmark ? "text-black" : "text-gray-400"}`} onClick={bookmarkPost} />
+							<BsFillBookmarkFill className={`text-[1.8rem]  hover:cursor-pointer   ${postIsInBookmark ? "text-gray-700" : "text-gray-300"}`} onClick={bookmarkPost} />
 						</div>
 						<div>
 							<p>
@@ -162,7 +186,7 @@ const PostDetails = () => {
 								<input
 									type="text"
 									placeholder="Add a comment"
-									className="bg-white  focus:outline-none focus:ring-0"
+									className={`focus:outline-none focus:ring-0  ${theme === "dark" ? "bg-black" : ""} `}
 									value={commentData.message}
 									onChange={(e) => setCommentData({ ...commentData, message: e.target.value })}
 									autoFocus={focus}

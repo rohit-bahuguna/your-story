@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPosts } from '../redux/features/postSlice';
-import { getAllUsers } from '../redux/features/userSlice';
-import Posts from './Posts/Posts';
-import ProfileBar from './UserComponents/ProfileBar';
-import Layout from './comman/Layout';
+
+import Posts from '../components/Posts/Posts';
+import ProfileBar from '../components/comman/ProfileBar';
+import Layout from '../components/comman/Layout';
 import CreatePost from './CreatePost';
 
 const Home = () => {
