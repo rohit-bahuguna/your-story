@@ -71,7 +71,7 @@ const Login = () => {
 					<div className="">
 						<label
 							htmlFor="email"
-							className="block mb-2 text-sm font-medium text-gray-900 ">
+							className="block mb-2 text-sm font-medium">
 							Your email
 						</label>
 						<input
@@ -92,7 +92,7 @@ const Login = () => {
 					<div className="relative">
 						<label
 							htmlFor="password"
-							className="block mb-2 text-sm font-medium text-gray-900 ">
+							className="block mb-2 text-sm font-medium">
 							Your password
 						</label>
 						<input

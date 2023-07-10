@@ -51,7 +51,7 @@ const Signup = () => {
 				<div className="">
 					<label
 						htmlFor="email"
-						className="block mb-2 text-sm font-medium text-gray-900 ">
+						className="block mb-2 text-sm font-medium  ">
 						Your Full Name
 					</label>
 					<input
@@ -93,7 +93,7 @@ const Signup = () => {
 				<div className="relative">
 					<label
 						htmlFor="password"
-						className="block mb-2 text-sm font-medium text-gray-900 ">
+						className="block mb-2 text-sm font-medium  ">
 						Your password
 					</label>
 					<input
