@@ -3,12 +3,17 @@ import { toast } from "react-hot-toast";
 
 
 function useMedia() {
-    const uploadMedia = async (media) => {
+    const uploadMedia = async (media, setIsUploadingMedia) => {
+
         const mediaType = media.type.split("/")[0];
-        if (mediaType === "video" && Math.round(media.size / 1024000) > 10)
+        if (mediaType === "video" && Math.round(media.size / 1024000) > 10) {
             toast.error("Video size should be less than 10MB");
-        else if (Math.round(media.size / 1024000) > 4)
+            setIsUploadingMedia(false)
+        }
+        else if (Math.round(media.size / 1024000) > 4) {
             toast.error("Image size should be less than 4MB");
+            setIsUploadingMedia(false)
+        }
         else {
             const data = new FormData();
             data.append("file", media);
@@ -26,6 +31,7 @@ function useMedia() {
                 const response = await fetch(url, requestOptions)
                 const result = await response.json()
                 toast.success(`${mediaType} Added`)
+                setIsUploadingMedia(false)
                 return { secure_url: result.secure_url, delete_token: result.delete_token }
 
 

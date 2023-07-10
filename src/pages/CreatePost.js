@@ -75,7 +75,7 @@ const CreatePost = ({ postId }) => {
 
 
 			setIsUploadingMedia(true)
-			const { secure_url, delete_token } = await uploadMedia(e.target.files[0]);
+			const { secure_url, delete_token } = await uploadMedia(e.target.files[0], setIsUploadingMedia);
 
 			setDeleteToken(delete_token)
 
