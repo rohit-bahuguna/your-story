@@ -123,7 +123,7 @@ export const updateProfile = createAsyncThunk(
 );
 
 const updateFollowingUser = (users, followingUser) => {
-    return [...users].map((user) =>
+    return users.map((user) =>
         user._id === followingUser._id ? followingUser : user
     );
 };

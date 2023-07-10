@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { followUser, getCurrentUser, unfollowUser } from '../../redux/features/userSlice';
@@ -8,12 +8,8 @@ const ProfileBar = () => {
 	const { user } = useSelector(state => state.auth);
 	const { users } = useSelector(state => state.user)
 	const dispatch = useDispatch()
-	const { followingUserEmails } = getUserFollowing(users, user.id)
-	useState(() => {
-		const { followingUser }
-			= getUserFollowing(users, user.id)
-		dispatch(updateAuthFollowing(followingUser))
-	}, [users])
+	const { followingUserEmails, followingUser } = getUserFollowing(users, user.id)
+
 
 	return (
 		<div className="flex flex-col gap-3    w-screen px-10 pl-5">
@@ -54,12 +50,20 @@ const ProfileBar = () => {
 
 const ProfileCard = ({ user: { id, _id, profileAvatar, fullName, username, email, followers } }) => {
 	const dispatch = useDispatch()
-	const { user } = useSelector(state => state.auth);
+	const { auth: { user }, user: { users } } = useSelector(state => state);
 	const isUserFolowing = isFollowed(followers, user.id)
 
 	const followOrUnfollow = () => {
 		isUserFolowing ? dispatch(unfollowUser({ token: user.token, followUserId: _id })) : dispatch(followUser({ token: user.token, followUserId: _id }))
 	}
+
+	useEffect(() => {
+		const { followingUser, followers } = getUserFollowing(users, user.id)
+
+
+		dispatch(updateAuthFollowing(followingUser))
+	}, [users])
+
 
 	return (
 

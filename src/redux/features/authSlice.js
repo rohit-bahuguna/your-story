@@ -57,6 +57,7 @@ export const userSlice = createSlice({
 			state.user = { ...state.user, ...payload }
 		},
 		updateAuthFollowing: (state, { payload }) => {
+
 			state.user = { ...state.user, following: payload }
 		}
 	},

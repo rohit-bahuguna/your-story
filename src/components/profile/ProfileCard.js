@@ -71,9 +71,9 @@ const ProfileCard = ({ user }) => {
 			</div>
 			<div className='flex w- justify-between  items-center'>
 
-				<p className=''><span className='text-black font-semibold mr-2'>{ currentUsersPosts && currentUsersPosts.length}</span> Posts</p>
-				<p><span className='text-black font-semibold mr-2 '>{followers && followers.length}</span> Followers</p>
-				<p><span className='text-black font-semibold mr-2 '>{following && following.length}</span> Following</p>	   </div>
+				<p className=''><span className=' font-semibold mr-2'>{currentUsersPosts && currentUsersPosts.length}</span> Posts</p>
+				<p><span className=' font-semibold mr-2 '>{followers && followers.length}</span> Followers</p>
+				<p><span className=' font-semibold mr-2 '>{following && following.length}</span> Following</p>	   </div>
 			<div className='flex flex-col gap-2'><p className="text-lg  font-semibold mr-2">{fullName}</p>
 				{website && <Link to={website} target='_blank'>
 					<p className='hover:text-sky-500'> <BsGlobe className="inline text-sky-500 mr-3" /> {website}</p>

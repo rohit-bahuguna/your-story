@@ -10,7 +10,7 @@ const PostGrid = () => {
         <div className='grid grid-cols-3 z-0 gap-5 mt-10 ' id={currentUsersPosts.length > 0 && "images-wrapper"}  >
 
             {
-                currentUsersPosts.length > 0 && currentUsersPosts.map(post => <PostCard post={post} />)
+                currentUsersPosts.length > 0 && currentUsersPosts.map(post => <PostCard key={post._id} post={post} />)
 
 
 

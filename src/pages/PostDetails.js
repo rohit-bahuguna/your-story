@@ -150,7 +150,7 @@ const PostDetails = () => {
 													<span>{
 														getTimeAgo(createdAt)
 													}</span>
-													<span>7 likes</span>
+													{/* <span>7 likes</span> */}
 													{/* {email === user.email &&
 														<FiMoreHorizontal class />} */}
 												</div>

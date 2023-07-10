@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileCard from "../components/profile/ProfileCard"
 import Layout from '../components/comman/Layout';
@@ -11,14 +11,16 @@ import PostGrid from '../components/Posts/PostGrid';
 const Profile = () => {
 	const { email } = useParams()
 	const dispatch = useDispatch()
-	const { auth, user: { currentUser }, post: { posts } } = useSelector(state => state);
-
+	const { auth, user: { currentUser, users }, post: { posts } } = useSelector(state => state);
 	useEffect(() => {
 
 		dispatch(getCurrentUsersPosts(email))
 
 	}, [email, posts])
 
+	useEffect(() => {
+		dispatch(getCurrentUser(auth.user.email))
+	}, [users])
 
 	return <Layout>
 
